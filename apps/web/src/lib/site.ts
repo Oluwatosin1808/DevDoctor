@@ -14,8 +14,8 @@ export const SITE = {
     "DevDoctor is an open-source command-line tool that examines JavaScript and TypeScript projects for security, configuration, dependency and environment issues.",
   description:
     "Catch issues before they become problems. DevDoctor examines your project, finds potential problems and tells you exactly where to start fixing them — all from your terminal.",
-  /** PLACEHOLDER: replace with the production domain once the site is deployed. */
-  url: "https://devdoctor.example.com",
+  /** Production origin — feeds canonical, Open Graph, and sitemap URLs. */
+  url: "https://web-five-sigma-66.vercel.app",
   locale: "en_US",
   year: 2026,
 } as const;
@@ -23,13 +23,9 @@ export const SITE = {
 /**
  * External destinations.
  *
- * PLACEHOLDER: every value below is `null` on purpose. The GitHub repository and
- * the npm package are not public yet, so components render an explicit
- * "coming soon" state instead of linking to a URL that would 404.
- *
- * To go live, replace the relevant `null` with the real absolute URL, e.g.
- *   github: "https://github.com/<your-org>/devdoctor"
- * and the components will automatically switch to normal external links.
+ * A `null` value is deliberate: components render an explicit "coming soon"
+ * state instead of linking to a URL that would 404. Flipping a key to a real
+ * absolute URL switches every control that uses it to a normal link.
  */
 export interface ExternalLinks {
   github: string | null;
@@ -44,9 +40,10 @@ export const LINKS: ExternalLinks = {
   github: "https://github.com/Oluwatosin1808/DevDoctor",
   npm: null,
   docs: "/docs",
-  contributing: null,
-  security: null,
-  license: null,
+  contributing:
+    "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
+  security: "https://github.com/Oluwatosin1808/DevDoctor/security/policy",
+  license: "https://github.com/Oluwatosin1808/DevDoctor/blob/main/LICENSE",
 };
 
 /** In-page navigation targets. Keep in sync with the section ids in `page.tsx`. */

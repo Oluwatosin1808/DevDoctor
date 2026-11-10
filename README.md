@@ -61,26 +61,29 @@ npm run build
   tokens.
 - **Fonts:** Geist Sans + Geist Mono, self-hosted via the `geist` npm package.
 
-### Coming-soon links
+### External links
 
-The GitHub, npm, documentation, contributing, security, and license URLs are not
-live yet. They are declared as `null` in `LINKS` inside
-`apps/web/src/lib/site.ts`, and any control that points at a `null` link renders a
-"SOON" chip instead of navigating. Clicking it shows a short toast explaining that
-the destination is not published yet — there are **no broken or invented links**,
-and no fabricated stars, downloads, or testimonials anywhere on the page.
+The destinations for the site live in the `LINKS` map inside
+`apps/web/src/lib/site.ts`. Today the repository, documentation,
+contributing guide, security policy, and license are live; the npm package is
+still `null` because it has not been published yet, so its control renders a
+"SOON" chip instead of navigating. Clicking it shows a short toast explaining
+that the destination is not published yet — there are **no broken or invented
+links**, and no fabricated stars, downloads, or testimonials anywhere on the
+page.
 
 To wire up a real destination once it exists, replace the `null` with the URL —
 the `ExternalLinks` type already allows `string | null` for every key:
 
 ```ts
 export const LINKS: ExternalLinks = {
-  github: "https://github.com/your-org/devdoctor",
+  github: "https://github.com/Oluwatosin1808/DevDoctor",
   npm: "https://www.npmjs.com/package/devdoctor",
-  docs: null,
-  contributing: null,
-  security: null,
-  license: null,
+  docs: "/docs",
+  contributing:
+    "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
+  security: "https://github.com/Oluwatosin1808/DevDoctor/security/policy",
+  license: "https://github.com/Oluwatosin1808/DevDoctor/blob/main/LICENSE",
 };
 ```
 
@@ -91,8 +94,11 @@ The moment a key is a non-empty string, that control becomes a normal link and t
 
 Title, description, canonical URL, Open Graph, and Twitter card values are set in
 `apps/web/src/app/layout.tsx`. `metadataBase` comes from `SITE.url` in
-`apps/web/src/lib/site.ts` — **set `SITE.url` to your production origin** before
-deploying so canonical and OG URLs resolve correctly.
+`apps/web/src/lib/site.ts`, which is set to the production origin
+(`https://web-five-sigma-66.vercel.app`) so canonical and OG URLs resolve
+correctly. If the site moves to a custom domain, update `SITE.url` and nothing
+else — `layout.tsx`, `opengraph-image.tsx`, `sitemap.ts`, and `robots.ts` all
+read it from there.
 
 ## SEO files
 
@@ -101,9 +107,19 @@ deploying so canonical and OG URLs resolve correctly.
 
 ## packages/cli
 
-A placeholder workspace so the CLI has a home and the `devdoctor` bin name is
-reserved. It is intentionally `private` and has no implementation yet; the web
-work does not depend on it.
+The `devdoctor` CLI: a zero-dependency, ESM Node ≥20 package that scans a
+project across five check categories (project, dependencies, environment, git,
+security), reduces the findings to a score out of 100, and exits `0`/`1`/`2`
+so CI can gate on it. The marketing site does not depend on this package.
+
+```bash
+npm test --workspace devdoctor   # node --test
+npm run scan --workspace devdoctor
+```
+
+See [`packages/cli/README.md`](packages/cli/README.md) for the full command
+reference, and [`/docs`](https://web-five-sigma-66.vercel.app/docs) for the
+published documentation.
 
 ## Stack
 
