@@ -31,8 +31,23 @@ Or run it without installing:
 npx @oluwat0s1n/devdoctor scan
 ```
 
-> Not published to npm yet — install from source with `npm install` at the
-> monorepo root, then run `node packages/cli/bin/devdoctor.js scan`.
+To work on it from source, run `npm install` at the monorepo root, then
+`node packages/cli/bin/devdoctor.js scan`.
+
+### Publishing
+
+Maintainers only. Publishes go through npm's normal `2FA` check:
+
+```bash
+cd packages/cli && npm publish      # npm prompts for a one-time code
+```
+
+A granular access token with **Bypass two-factor authentication** also works
+(`npm config set //registry.npmjs.org/:_authToken=...`), which is how this
+package was first released. Note that npm is restricting bypass-2FA tokens for
+direct publishing from **January 2027** — after that, use an OTP code per
+publish, or set up [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
+against a CI workflow.
 
 ## Usage
 

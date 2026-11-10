@@ -5,7 +5,19 @@ A developer-first diagnostic CLI and its marketing site, in one npm-workspaces m
 ```
 DevDoctor/
 ├── apps/web/        # Marketing site — Next.js App Router, TypeScript, Tailwind CSS
-└── packages/cli/    # CLI package (placeholder stub — not yet implemented)
+└── packages/cli/    # CLI package — published as @oluwat0s1n/devdoctor
+```
+
+## Install
+
+```bash
+npm install -g @oluwat0s1n/devdoctor   # then run `devdoctor scan`
+```
+
+Or without installing:
+
+```bash
+npx @oluwat0s1n/devdoctor scan
 ```
 
 ## Requirements
@@ -78,7 +90,7 @@ the `ExternalLinks` type already allows `string | null` for every key:
 ```ts
 export const LINKS: ExternalLinks = {
   github: "https://github.com/Oluwatosin1808/DevDoctor",
-  npm: "https://www.npmjs.com/package/devdoctor",
+  npm: "https://www.npmjs.com/package/@oluwat0s1n/devdoctor",
   docs: "/docs",
   contributing:
     "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
