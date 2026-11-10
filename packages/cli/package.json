@@ -1,11 +1,14 @@
 {
-  "name": "devdoctor",
+  "name": "@oluwat0s1n/devdoctor",
   "version": "0.1.0",
   "description": "DevDoctor — a developer-first diagnostic CLI that scans JavaScript and TypeScript projects for configuration, dependency, environment, git and security issues.",
   "license": "MIT",
   "type": "module",
   "bin": {
     "devdoctor": "./bin/devdoctor.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "bin",

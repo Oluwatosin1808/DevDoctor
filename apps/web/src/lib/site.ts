@@ -38,7 +38,7 @@ export interface ExternalLinks {
 
 export const LINKS: ExternalLinks = {
   github: "https://github.com/Oluwatosin1808/DevDoctor",
-  npm: null,
+  npm: "https://www.npmjs.com/package/@oluwat0s1n/devdoctor",
   docs: "/docs",
   contributing:
     "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
@@ -59,8 +59,8 @@ export const ANCHORS = {
 
 /** Installation commands shown in the how-it-works and install sections. */
 export const COMMANDS = {
-  installGlobal: "npm install -g devdoctor",
-  installNpx: "npx devdoctor scan",
+  installGlobal: "npm install -g @oluwat0s1n/devdoctor",
+  installNpx: "npx @oluwat0s1n/devdoctor scan",
   scan: "devdoctor scan",
 } as const;
 

@@ -22,13 +22,13 @@ Score 96/100 — 1 finding(s) need attention
 ## Install
 
 ```bash
-npm install -g devdoctor
+npm install -g @oluwat0s1n/devdoctor
 ```
 
 Or run it without installing:
 
 ```bash
-npx devdoctor scan
+npx @oluwat0s1n/devdoctor scan
 ```
 
 > Not published to npm yet — install from source with `npm install` at the
@@ -96,8 +96,8 @@ From the monorepo root:
 
 ```bash
 npm install
-npm run scan --workspace devdoctor   # run a scan
-npm test  --workspace devdoctor      # node --test
+npm run scan --workspace @oluwat0s1n/devdoctor   # run a scan
+npm test  --workspace @oluwat0s1n/devdoctor      # node --test
 ```
 
 The marketing site in `apps/web` does not depend on this package.

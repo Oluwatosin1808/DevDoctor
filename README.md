@@ -113,8 +113,8 @@ security), reduces the findings to a score out of 100, and exits `0`/`1`/`2`
 so CI can gate on it. The marketing site does not depend on this package.
 
 ```bash
-npm test --workspace devdoctor   # node --test
-npm run scan --workspace devdoctor
+npm test --workspace @oluwat0s1n/devdoctor   # node --test
+npm run scan --workspace @oluwat0s1n/devdoctor
 ```
 
 See [`packages/cli/README.md`](packages/cli/README.md) for the full command

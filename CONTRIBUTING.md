@@ -32,7 +32,7 @@ Useful scripts, run from the repo root:
 | `npm run build`         | Production build of the site                    |
 | `npm run lint`          | ESLint across the web app                       |
 | `npm run typecheck`     | `next typegen` + `tsc --noEmit`                 |
-| `npm test --workspace devdoctor` | Run the CLI test suite (`node --test`)  |
+| `npm test --workspace @oluwat0s1n/devdoctor` | Run the CLI test suite (`node --test`)  |
 
 > `typecheck` runs `next typegen` first because the generated `LayoutProps`
 > route types must exist before `tsc` can type-check `app/layout.tsx`.
@@ -80,7 +80,7 @@ Useful scripts, run from the repo root:
 2. Make the change, keeping commits focused and described in the imperative
    ("Add dependency range check", not "Added").
 3. Verify: `npm run lint`, `npm run typecheck`, `npm run build`, and
-   `npm test --workspace devdoctor`.
+   `npm test --workspace @oluwat0s1n/devdoctor`.
 4. Open a PR describing **what** changed and **why**. If the change affects
    visible copy or behaviour, include a screenshot or a short recording.
 

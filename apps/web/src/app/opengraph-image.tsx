@@ -202,7 +202,7 @@ export default function Image() {
             }}
           >
             <span style={{ color: ACCENT }}>$</span>
-            <span>npm install -g devdoctor</span>
+            <span>npm install -g @oluwat0s1n/devdoctor</span>
           </div>
 
           <div
