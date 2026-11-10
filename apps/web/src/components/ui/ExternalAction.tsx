@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { COMING_SOON_MESSAGES, type ExternalLinks } from "@/lib/site";
@@ -18,17 +19,19 @@ interface ExternalActionProps {
   iconClassName?: string;
   /** Hide the fixed toast and rely on the visible chip + live region only. */
   quiet?: boolean;
+  /** Fired on activation of a real destination (coming-soon controls ignore it). */
+  onClick?: () => void;
 }
 
 const TOAST_DURATION = 4200;
 
 /**
- * Renders a real external link when the destination exists, and an explicit,
- * keyboard-reachable "coming soon" control when it does not.
+ * Resolves a destination from `lib/site.ts` into a real control.
  *
- * The repository and npm package are not public yet, so every external URL in
- * `lib/site.ts` is currently `null` — this keeps the site honest instead of
- * shipping links that 404.
+ * - Internal paths (a leading slash) navigate client-side via `next/link`.
+ * - Absolute URLs open in a new tab.
+ * - A `null` destination renders an explicit, keyboard-reachable "coming
+ *   soon" control instead of linking to a URL that would 404.
  */
 export function ExternalAction({
   linkKey,
@@ -38,6 +41,7 @@ export function ExternalAction({
   showSoonChip = true,
   iconClassName = "size-3.5",
   quiet = false,
+  onClick,
 }: ExternalActionProps) {
   const noteId = useId();
   const [toast, setToast] = useState(false);
@@ -59,16 +63,33 @@ export function ExternalAction({
   }, [toast]);
 
   if (href) {
+    // Internal destinations (a leading slash) are same-app routes: navigate
+    // with the router and drop the "leaves the site" affordances.
+    if (href.startsWith("/")) {
+      return (
+        <Link href={href} className={className} onClick={onClick}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <a
         href={href}
         target="_blank"
         rel="noreferrer noopener"
         className={className}
-        aria-describedby={noteId}
+        onClick={onClick}
       >
         {children}
-        <ArrowUpRight aria-hidden className={iconClassName} />
+        {/* Preflight sets `svg { display: block }`, which would push the arrow
+            onto its own line inside an inline anchor — keep it inline. */}
+        <ArrowUpRight
+          aria-hidden
+          className={["inline-block", iconClassName]
+            .filter(Boolean)
+            .join(" ")}
+        />
         <span className="sr-only">(opens in a new tab)</span>
       </a>
     );

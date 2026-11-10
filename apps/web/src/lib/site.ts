@@ -41,9 +41,9 @@ export interface ExternalLinks {
 }
 
 export const LINKS: ExternalLinks = {
-  github: null,
+  github: "https://github.com/Oluwatosin1808/DevDoctor",
   npm: null,
-  docs: null,
+  docs: "/docs",
   contributing: null,
   security: null,
   license: null,

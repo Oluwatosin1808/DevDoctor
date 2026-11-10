@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { ExternalAction } from "@/components/ui/ExternalAction";
@@ -15,9 +16,11 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Open source", href: `#${ANCHORS.openSource}`, id: ANCHORS.openSource },
-  { label: "Features", href: `#${ANCHORS.features}`, id: ANCHORS.features },
-  { label: "How it works", href: `#${ANCHORS.howItWorks}`, id: ANCHORS.howItWorks },
+  // Root-relative so they keep working from routes other than `/`, where the
+  // bare `#section` form would point at an anchor that does not exist.
+  { label: "Open source", href: `/#${ANCHORS.openSource}`, id: ANCHORS.openSource },
+  { label: "Features", href: `/#${ANCHORS.features}`, id: ANCHORS.features },
+  { label: "How it works", href: `/#${ANCHORS.howItWorks}`, id: ANCHORS.howItWorks },
 ];
 
 const DESKTOP_LINK_CLASS =
@@ -117,13 +120,13 @@ export function SiteHeader() {
       ].join(" ")}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           className="shrink-0 rounded-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface focus-visible:outline-none"
           aria-label="DevDoctor — back to top"
         >
           <Logo />
-        </a>
+        </Link>
 
         {/* Desktop navigation */}
         <nav
@@ -173,7 +176,7 @@ export function SiteHeader() {
             GitHub
           </ExternalAction>
 
-          <ButtonLink href="#install" size="sm">
+          <ButtonLink href="/#install" size="sm">
             Run your first checkup
           </ButtonLink>
         </div>
@@ -230,6 +233,7 @@ export function SiteHeader() {
                     linkKey="docs"
                     href={LINKS.docs}
                     className={MOBILE_LINK_CLASS}
+                    onClick={closeMenu}
                   >
                     Documentation
                   </ExternalAction>
@@ -247,7 +251,7 @@ export function SiteHeader() {
 
               <div className="mt-4 flex flex-col gap-2.5 border-t border-line pt-4">
                 <ButtonLink
-                  href="#install"
+                  href="/#install"
                   onClick={closeMenu}
                   size="lg"
                   className="w-full"

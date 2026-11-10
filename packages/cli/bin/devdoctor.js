@@ -1,13 +1,4 @@
 #!/usr/bin/env node
-// PLACEHOLDER — the DevDoctor CLI implementation lives here once it is built.
-// This stub exists so the workspace resolves and the `devdoctor` bin links correctly.
+import { main } from "../src/main.js";
 
-process.stdout.write(
-  [
-    "devdoctor",
-    "",
-    "  The DevDoctor CLI is under development.",
-    "  Run `devdoctor scan` once the first release ships.",
-    "",
-  ].join("\n"),
-);
+process.exitCode = main(process.argv.slice(2));

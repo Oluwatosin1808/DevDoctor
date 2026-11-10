@@ -1,8 +1,7 @@
 {
   "name": "devdoctor",
   "version": "0.1.0",
-  "private": true,
-  "description": "DevDoctor — a developer-first diagnostic CLI for JavaScript and TypeScript projects. PLACEHOLDER PACKAGE: implementation pending.",
+  "description": "DevDoctor — a developer-first diagnostic CLI that scans JavaScript and TypeScript projects for configuration, dependency, environment, git and security issues.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -10,16 +9,34 @@
   },
   "files": [
     "bin",
+    "src",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oluwatosin1808/DevDoctor.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/Oluwatosin1808/DevDoctor#readme",
+  "bugs": {
+    "url": "https://github.com/Oluwatosin1808/DevDoctor/issues"
+  },
   "engines": {
     "node": ">=20"
+  },
+  "scripts": {
+    "scan": "node ./bin/devdoctor.js scan",
+    "test": "node --test test/cli.test.js",
+    "prepublishOnly": "node ./bin/devdoctor.js --version"
   },
   "keywords": [
     "cli",
     "diagnostics",
     "security",
     "lint",
-    "code-quality"
+    "code-quality",
+    "dependencies",
+    "javascript",
+    "typescript"
   ]
 }

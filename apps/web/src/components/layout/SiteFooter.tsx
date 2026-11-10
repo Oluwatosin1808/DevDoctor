@@ -14,10 +14,10 @@ const COLUMNS: FooterColumn[] = [
   {
     heading: "Product",
     links: [
-      { label: "Features", href: `#${ANCHORS.features}`, internal: true },
-      { label: "How it works", href: `#${ANCHORS.howItWorks}`, internal: true },
-      { label: "Diagnostics", href: `#${ANCHORS.diagnostics}`, internal: true },
-      { label: "FAQ", href: `#${ANCHORS.faq}`, internal: true },
+      { label: "Features", href: `/#${ANCHORS.features}`, internal: true },
+      { label: "How it works", href: `/#${ANCHORS.howItWorks}`, internal: true },
+      { label: "Diagnostics", href: `/#${ANCHORS.diagnostics}`, internal: true },
+      { label: "FAQ", href: `/#${ANCHORS.faq}`, internal: true },
     ],
   },
   {
