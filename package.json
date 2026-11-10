@@ -1,0 +1,21 @@
+{
+  "name": "devdoctor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DevDoctor monorepo — a developer-first diagnostic CLI and its marketing site.",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @devdoctor/web",
+    "build": "npm run build --workspace @devdoctor/web",
+    "start": "npm run start --workspace @devdoctor/web",
+    "lint": "npm run lint --workspace @devdoctor/web",
+    "typecheck": "npm run typecheck --workspace @devdoctor/web"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
