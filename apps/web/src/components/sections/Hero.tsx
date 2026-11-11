@@ -1,5 +1,4 @@
-import { ArrowRight } from "lucide-react";
-import { ButtonLink } from "@/components/ui/Button";
+import { buttonClasses } from "@/components/ui/Button";
 import { ExternalAction } from "@/components/ui/ExternalAction";
 import { Reveal } from "@/components/ui/Reveal";
 import { LINKS } from "@/lib/site";
@@ -11,7 +10,7 @@ export function Hero() {
     <section
       id="top"
       aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 lg:pt-40"
+      className="relative isolate overflow-hidden pt-14 pb-14 sm:pt-[88px] sm:pb-20 lg:pt-[120px]"
     >
       {/* Backdrop: faint engineering grid + a single lime bloom. */}
       <div
@@ -29,32 +28,22 @@ export function Hero() {
 
       <div className="mx-auto w-full max-w-4xl px-5 text-center sm:px-6">
         <Reveal delay={0}>
-          <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-raised/70 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.14em] text-muted uppercase backdrop-blur">
-            <span
-              aria-hidden
-              className="animate-pulse-dot size-1.5 rounded-full bg-accent"
-            />
-            Your codebase&apos;s new best friend
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.08}>
           <h1
             id="hero-heading"
-            className="mt-7 text-[2.5rem] leading-[1.03] font-medium tracking-[-0.035em] text-balance text-foreground sm:text-6xl lg:text-[4.25rem]"
+            className="text-[2.5rem] leading-[1.03] font-medium tracking-[-0.035em] text-balance text-foreground sm:text-6xl lg:text-[4.25rem]"
           >
             Your code deserves a{" "}
             <span className="text-accent">regular checkup</span>.
           </h1>
         </Reveal>
 
-        <Reveal delay={0.16}>
+        <Reveal delay={0.06}>
           <p className="mt-6 text-lg font-medium tracking-tight text-foreground sm:text-xl">
             Catch issues before they become problems.
           </p>
         </Reveal>
 
-        <Reveal delay={0.22}>
+        <Reveal delay={0.1}>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             From exposed secrets to broken configurations, DevDoctor examines
             your project, finds potential problems and tells you exactly where
@@ -62,16 +51,16 @@ export function Hero() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.3}>
+        <Reveal delay={0.16}>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink
-              href="#install"
-              size="lg"
-              className="w-full sm:w-auto"
+            <ExternalAction
+              linkKey="docs"
+              href={LINKS.docs}
+              showSoonChip={false}
+              className={buttonClasses("primary", "lg", "w-full sm:w-auto")}
             >
               Explore DevDoctor
-              <ArrowRight aria-hidden className="size-4" />
-            </ButtonLink>
+            </ExternalAction>
 
             <ExternalAction
               linkKey="github"
@@ -83,7 +72,7 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.38}>
+        <Reveal delay={0.22}>
           <p className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[11px] tracking-[0.12em] text-dim uppercase">
             {TRUST_LINE.map((item, index) => (
               <span key={item} className="inline-flex items-center gap-3">

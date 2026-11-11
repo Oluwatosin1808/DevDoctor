@@ -46,22 +46,17 @@ export const LINKS: ExternalLinks = {
   license: "https://github.com/Oluwatosin1808/DevDoctor/blob/main/LICENSE",
 };
 
-/** In-page navigation targets. Keep in sync with the section ids in `page.tsx`. */
+/**
+ * In-page navigation targets. Keep in sync with the section ids in `page.tsx`.
+ */
 export const ANCHORS = {
-  problem: "problem",
-  features: "features",
-  howItWorks: "how-it-works",
-  diagnostics: "diagnostics",
-  openSource: "open-source",
-  install: "install",
-  faq: "faq",
+  privacy: "privacy",
 } as const;
 
 /** Installation commands shown in the how-it-works and install sections. */
 export const COMMANDS = {
   installGlobal: "npm install -g @oluwat0s1n/devdoctor",
   installNpx: "npx @oluwat0s1n/devdoctor scan",
-  scan: "devdoctor scan",
 } as const;
 
 /** A single neutral message for every "coming soon" affordance. */

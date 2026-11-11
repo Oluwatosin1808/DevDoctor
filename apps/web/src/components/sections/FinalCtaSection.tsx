@@ -31,7 +31,7 @@ export function FinalCtaSection() {
 
           <Reveal delay={0.16}>
             <div className="mt-9 flex justify-center">
-              <ButtonLink href="#install" size="lg">
+              <ButtonLink href="/docs" size="lg">
                 Run your first checkup
                 <ArrowRight aria-hidden className="size-4" />
               </ButtonLink>
