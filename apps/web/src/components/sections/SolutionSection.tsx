@@ -18,7 +18,6 @@ export function SolutionSection() {
         <div className="relative">
           <SectionHeading
             align="center"
-            eyebrow="Meet your new development sidekick"
             title={
               <>
                 Meet DevDoctor. Your project&apos;s{" "}

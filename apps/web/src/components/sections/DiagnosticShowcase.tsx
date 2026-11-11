@@ -108,7 +108,6 @@ export function DiagnosticShowcase() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
-              eyebrow="Your project, under the microscope"
               title="No more digging around. Just clear answers."
               description={
                 <>

@@ -27,7 +27,6 @@ export function PrivacySection() {
       <div className="overflow-hidden rounded-2xl border border-line bg-panel">
         <div className="grid gap-10 p-7 sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:p-12">
           <SectionHeading
-            eyebrow="Your code. Your machine. Your rules."
             title="Your codebase isn’t ours to collect."
             description={
               <>

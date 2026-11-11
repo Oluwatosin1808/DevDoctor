@@ -32,7 +32,6 @@ export function HowItWorksSection() {
   return (
     <Section id={ANCHORS.howItWorks} tone="panel">
       <SectionHeading
-        eyebrow="Simple by design"
         title="Three steps to a healthier codebase."
       />
 

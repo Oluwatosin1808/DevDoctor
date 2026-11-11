@@ -50,7 +50,6 @@ export function FaqSection() {
   return (
     <Section id={ANCHORS.faq}>
       <SectionHeading
-        eyebrow="Good questions"
         title="Before you run your first checkup."
       />
 

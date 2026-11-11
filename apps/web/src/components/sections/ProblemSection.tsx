@@ -26,7 +26,6 @@ export function ProblemSection() {
   return (
     <Section id={ANCHORS.problem}>
       <SectionHeading
-        eyebrow="The problem"
         title="Everything looks fine. Until it doesn’t."
         description={
           <>

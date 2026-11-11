@@ -27,7 +27,6 @@ export function InstallSection() {
       <div className="mx-auto max-w-2xl">
         <SectionHeading
           align="center"
-          eyebrow="Get started"
           title="Run your first checkup."
           description="Add DevDoctor to your workflow and scan a project in under a minute."
         />

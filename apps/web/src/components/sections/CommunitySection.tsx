@@ -22,7 +22,6 @@ export function CommunitySection() {
         <div className="relative mx-auto max-w-2xl text-center">
           <SectionHeading
             align="center"
-            eyebrow="Built in the open"
             title="Good tools get better when developers build together."
             description="DevDoctor is open source. Explore the code, report issues, suggest improvements or contribute a diagnostic check of your own."
           />

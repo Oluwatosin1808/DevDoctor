@@ -35,7 +35,6 @@ export function FeaturesSection() {
   return (
     <Section id={ANCHORS.features}>
       <SectionHeading
-        eyebrow="What’s under the hood?"
         title="Everything you need to spot the warning signs."
         description="One command. Multiple checks. A clearer picture of your project’s health."
       />
