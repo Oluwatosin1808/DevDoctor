@@ -18,8 +18,9 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   // Root-relative so they keep working from routes other than `/`, where the
   // bare `#section` form would point at an anchor that does not exist.
-  // Only sections that actually exist on the page belong here.
-  { label: "Privacy", href: `/#${ANCHORS.privacy}`, id: ANCHORS.privacy },
+  { label: "Open source", href: `/#${ANCHORS.openSource}`, id: ANCHORS.openSource },
+  { label: "Features", href: `/#${ANCHORS.features}`, id: ANCHORS.features },
+  { label: "How it works", href: `/#${ANCHORS.howItWorks}`, id: ANCHORS.howItWorks },
 ];
 
 const DESKTOP_LINK_CLASS =
@@ -175,7 +176,7 @@ export function SiteHeader() {
             GitHub
           </ExternalAction>
 
-          <ButtonLink href="/docs" size="sm">
+          <ButtonLink href="/#install" size="sm">
             Run your first checkup
           </ButtonLink>
         </div>
@@ -250,7 +251,7 @@ export function SiteHeader() {
 
               <div className="mt-4 flex flex-col gap-2.5 border-t border-line pt-4">
                 <ButtonLink
-                  href="/docs"
+                  href="/#install"
                   onClick={closeMenu}
                   size="lg"
                   className="w-full"

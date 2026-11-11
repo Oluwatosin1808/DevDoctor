@@ -1,6 +1,6 @@
 import { ExternalAction } from "@/components/ui/ExternalAction";
 import { Logo } from "@/components/ui/Logo";
-import { LINKS, SITE } from "@/lib/site";
+import { ANCHORS, LINKS, SITE } from "@/lib/site";
 
 interface FooterColumn {
   heading: string;
@@ -11,6 +11,15 @@ interface FooterColumn {
 }
 
 const COLUMNS: FooterColumn[] = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: `/#${ANCHORS.features}`, internal: true },
+      { label: "How it works", href: `/#${ANCHORS.howItWorks}`, internal: true },
+      { label: "Diagnostics", href: `/#${ANCHORS.diagnostics}`, internal: true },
+      { label: "FAQ", href: `/#${ANCHORS.faq}`, internal: true },
+    ],
+  },
   {
     heading: "Resources",
     links: [
@@ -36,7 +45,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-surface">
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-10">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10">
           {/* Brand */}
           <div className="max-w-sm">
             <Logo />
