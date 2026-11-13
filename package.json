@@ -1,19 +1,19 @@
 {
-  "name": "devdoctor",
+  "name": "cdoc",
   "version": "0.1.0",
   "private": true,
-  "description": "DevDoctor monorepo — a developer-first diagnostic CLI and its marketing site.",
+  "description": "cDoc monorepo — a developer-first diagnostic CLI and its marketing site.",
   "license": "MIT",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace @devdoctor/web",
-    "build": "npm run build --workspace @devdoctor/web",
-    "start": "npm run start --workspace @devdoctor/web",
-    "lint": "npm run lint --workspace @devdoctor/web",
-    "typecheck": "npm run typecheck --workspace @devdoctor/web"
+    "dev": "npm run dev --workspace @cdoc/web",
+    "build": "npm run build --workspace @cdoc/web",
+    "start": "npm run start --workspace @cdoc/web",
+    "lint": "npm run lint --workspace @cdoc/web",
+    "typecheck": "npm run typecheck --workspace @cdoc/web"
   },
   "engines": {
     "node": ">=20"

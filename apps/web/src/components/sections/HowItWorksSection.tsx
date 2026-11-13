@@ -7,15 +7,15 @@ import { ANCHORS, COMMANDS } from "@/lib/site";
 const STEPS = [
   {
     number: "01",
-    title: "Install DevDoctor",
-    body: "Add DevDoctor to your development workflow using npm.",
+    title: "Install cDoc",
+    body: "Add cDoc to your development workflow using npm.",
     command: COMMANDS.installGlobal,
     caption: "Installs the CLI globally.",
   },
   {
     number: "02",
     title: "Run your checkup",
-    body: "Navigate to your project and let DevDoctor examine its configuration.",
+    body: "Navigate to your project and let cDoc examine its configuration.",
     command: COMMANDS.scan,
     caption: "Scans the project in your current directory.",
   },

@@ -8,39 +8,39 @@ import { ANCHORS } from "@/lib/site";
 
 const FAQS = [
   {
-    question: "What exactly is DevDoctor?",
+    question: "What exactly is cDoc?",
     answer:
-      "DevDoctor is an open-source command-line tool that scans JavaScript and TypeScript projects for common security, configuration, dependency and environment issues.",
+      "cDoc is an open-source command-line tool that scans JavaScript and TypeScript projects for common security, configuration, dependency and environment issues.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "No. DevDoctor runs from your terminal — there is no sign-up, no dashboard to log into and no API key to manage.",
+      "No. cDoc runs from your terminal — there is no sign-up, no dashboard to log into and no API key to manage.",
   },
   {
-    question: "Does DevDoctor modify my code?",
+    question: "Does cDoc modify my code?",
     answer:
-      "No. DevDoctor reports what it finds and explains what to look at. It never rewrites files on your behalf, so nothing in your project changes unless you decide to act on a recommendation.",
+      "No. cDoc reports what it finds and explains what to look at. It never rewrites files on your behalf, so nothing in your project changes unless you decide to act on a recommendation.",
   },
   {
     question: "Which frameworks does it support?",
     answer:
-      "DevDoctor works at the project level rather than per framework: it reads your package.json, configuration files and environment examples. That keeps it framework-agnostic across JavaScript and TypeScript projects instead of tying it to one stack.",
+      "cDoc works at the project level rather than per framework: it reads your package.json, configuration files and environment examples. That keeps it framework-agnostic across JavaScript and TypeScript projects instead of tying it to one stack.",
   },
   {
-    question: "Does DevDoctor send my source code anywhere?",
+    question: "Does cDoc send my source code anywhere?",
     answer:
       "No. Diagnostics run locally on your machine. Your source code is not uploaded and is not sent to an AI service. Any check that needs the network will be explicitly opt-in and clearly labelled.",
   },
   {
-    question: "Is DevDoctor free?",
+    question: "Is cDoc free?",
     answer:
-      "Yes. DevDoctor is open source and released under the MIT License. Use it on as many projects as you like.",
+      "Yes. cDoc is open source and released under the MIT License. Use it on as many projects as you like.",
   },
   {
-    question: "Can I use DevDoctor in CI/CD?",
+    question: "Can I use cDoc in CI/CD?",
     answer:
-      "DevDoctor is built to run non-interactively, which makes it a natural fit for a pipeline. Step-by-step CI/CD recipes will ship with the public documentation, which isn’t live yet.",
+      "cDoc is built to run non-interactively, which makes it a natural fit for a pipeline. Step-by-step CI/CD recipes will ship with the public documentation, which isn’t live yet.",
   },
 ] as const;
 

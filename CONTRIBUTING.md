@@ -1,17 +1,17 @@
-# Contributing to DevDoctor
+# Contributing to cDoc
 
-Thanks for your interest in improving DevDoctor. This document explains how to
+Thanks for your interest in improving cDoc. This document explains how to
 get a working checkout, what to run before you open a pull request, and the
 conventions that keep the codebase consistent.
 
 ## Project layout
 
-DevDoctor is an npm workspaces monorepo:
+cDoc is an npm workspaces monorepo:
 
 | Path            | Contents                                                  |
 | --------------- | --------------------------------------------------------- |
 | `apps/web`      | The marketing site and the in-app `/docs` route (Next.js)  |
-| `packages/cli`  | The `devdoctor` CLI (Node, ESM, zero runtime dependencies)  |
+| `packages/cli`  | The `cdoc` CLI (Node, ESM, zero runtime dependencies)  |
 
 The website does not depend on the CLI package, and the CLI does not depend on
 anything else in the repo. Changes to one never require changes to the other.
@@ -19,8 +19,8 @@ anything else in the repo. Changes to one never require changes to the other.
 ## Getting started
 
 ```bash
-git clone https://github.com/Oluwatosin1808/DevDoctor.git
-cd DevDoctor
+git clone https://github.com/Oluwatosin1808/cDoc.git
+cd cDoc
 npm install
 ```
 
@@ -88,7 +88,7 @@ Useful scripts, run from the repo root:
 
 Open an issue with:
 
-- The DevDoctor version (`devdoctor --version`) and your Node version
+- The cDoc version (`cdoc --version`) and your Node version
   (`node --version`)
 - What you ran, what you expected, and what happened instead
 - A minimal reproduction — a small project or a pasted report output

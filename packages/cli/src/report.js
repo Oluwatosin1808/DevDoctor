@@ -6,7 +6,7 @@ export function formatHuman(result, { paint }) {
   const lines = [];
   const rule = "\u2500".repeat(56);
 
-  lines.push(paint("bold", "DevDoctor"));
+  lines.push(paint("bold", "cDoc"));
   lines.push(paint("dim", `Scanning ${result.root}`));
   lines.push("");
 

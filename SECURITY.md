@@ -2,13 +2,13 @@
 
 ## Reporting a vulnerability
 
-If you believe you have found a security vulnerability in DevDoctor, please
+If you believe you have found a security vulnerability in cDoc, please
 report it privately. **Do not open a public GitHub issue.**
 
 Email **mosestosyn07@gmail.com** with:
 
 - A description of the issue and its potential impact
-- The version affected (`devdoctor --version`) and your Node version
+- The version affected (`cdoc --version`) and your Node version
   (`node --version`)
 - Steps to reproduce, or a proof of concept
 - Any suggested fix, if you have one
@@ -21,7 +21,7 @@ credit for the report if you want it.
 
 In scope:
 
-- The `devdoctor` CLI (`packages/cli`) — for example, a path traversal or
+- The `cdoc` CLI (`packages/cli`) — for example, a path traversal or
   command injection in how it reads project files, or a check that reports a
   secret value back to the terminal or into `--json` output
 - The marketing site and `/docs` route (`apps/web`) — for example, XSS, an
@@ -29,7 +29,7 @@ In scope:
 
 Out of scope:
 
-- Vulnerabilities in dependencies of the site that have no DevDoctor-specific
+- Vulnerabilities in dependencies of the site that have no cDoc-specific
   integration — report those upstream
 - Reports that require a user to deliberately run untrusted code through the
   CLI

@@ -1,12 +1,12 @@
-# devdoctor (CLI)
+# cdoc (CLI)
 
 A developer-first diagnostic CLI for JavaScript and TypeScript projects. It runs
 five categories of checks and reduces the findings to a score out of 100.
 
 ```
-$ devdoctor scan
+$ cdoc scan
 
-DevDoctor
+cDoc
 Scanning /your/project
 
 Project configuration
@@ -32,7 +32,7 @@ npx @oluwat0s1n/devdoctor scan
 ```
 
 To work on it from source, run `npm install` at the monorepo root, then
-`node packages/cli/bin/devdoctor.js scan`.
+`node packages/cli/bin/cdoc.js scan`.
 
 ### Publishing
 
@@ -52,7 +52,7 @@ against a CI workflow.
 ## Usage
 
 ```
-devdoctor [scan] [options]
+cdoc [scan] [options]
 
 Commands
   scan              Run a diagnostic scan of the current project (default)

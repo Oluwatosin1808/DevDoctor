@@ -123,7 +123,7 @@ export function SiteHeader() {
         <Link
           href="/#top"
           className="shrink-0 rounded-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface focus-visible:outline-none"
-          aria-label="DevDoctor — back to top"
+          aria-label="cDoc — back to top"
         >
           <Logo />
         </Link>

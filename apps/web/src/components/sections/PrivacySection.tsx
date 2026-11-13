@@ -17,7 +17,7 @@ const POINTS = [
   {
     icon: FileX,
     title: "No automatic file modifications.",
-    body: "DevDoctor reports. You decide what changes.",
+    body: "cDoc reports. You decide what changes.",
   },
 ] as const;
 
@@ -31,7 +31,7 @@ export function PrivacySection() {
             description={
               <>
                 <p>
-                  DevDoctor is designed to run locally. Your project files stay
+                  cDoc is designed to run locally. Your project files stay
                   on your machine, and the initial diagnostic experience
                   doesn’t require an account or send your source code to an AI
                   service.

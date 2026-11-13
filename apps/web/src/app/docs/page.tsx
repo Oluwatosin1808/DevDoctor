@@ -8,7 +8,7 @@ import { COMMANDS, LINKS, SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Documentation",
   description:
-    "Install DevDoctor, run your first checkup, and understand the five diagnostic checks, the scoring model and the exit codes.",
+    "Install cDoc, run your first checkup, and understand the five diagnostic checks, the scoring model and the exit codes.",
   alternates: {
     canonical: "/docs",
   },
@@ -226,7 +226,7 @@ export default function DocsPage() {
                     </code>{" "}
                     followed by{" "}
                     <code className="font-mono text-[13px] text-foreground">
-                      node packages/cli/bin/devdoctor.js scan
+                      node packages/cli/bin/cdoc.js scan
                     </code>
                     .
                   </p>
@@ -242,12 +242,12 @@ export default function DocsPage() {
                 is the default command, so these are equivalent:
               </p>
               <CommandBlock
-                command="devdoctor"
+                command="cdoc"
                 prompt="›"
                 copyLabel="Copy the bare command"
               />
               <CommandBlock
-                command="devdoctor scan"
+                command="cdoc scan"
                 prompt="›"
                 copyLabel="Copy the scan command"
               />

@@ -1,9 +1,9 @@
-# DevDoctor
+# cDoc
 
 A developer-first diagnostic CLI and its marketing site, in one npm-workspaces monorepo.
 
 ```
-DevDoctor/
+cDoc/
 ├── apps/web/        # Marketing site — Next.js App Router, TypeScript, Tailwind CSS
 └── packages/cli/    # CLI package — published as @oluwat0s1n/devdoctor
 ```
@@ -11,7 +11,7 @@ DevDoctor/
 ## Install
 
 ```bash
-npm install -g @oluwat0s1n/devdoctor   # then run `devdoctor scan`
+npm install -g @oluwat0s1n/devdoctor   # then run `cdoc scan`
 ```
 
 Or without installing:
@@ -41,7 +41,7 @@ Starts the Next.js dev server at <http://localhost:3000>.
 
 ## Scripts
 
-All scripts run from the repo root and delegate to the `@devdoctor/web` workspace:
+All scripts run from the repo root and delegate to the `@cdoc/web` workspace:
 
 | Command | What it does |
 | --- | --- |
@@ -89,13 +89,13 @@ the `ExternalLinks` type already allows `string | null` for every key:
 
 ```ts
 export const LINKS: ExternalLinks = {
-  github: "https://github.com/Oluwatosin1808/DevDoctor",
+  github: "https://github.com/Oluwatosin1808/cDoc",
   npm: "https://www.npmjs.com/package/@oluwat0s1n/devdoctor",
   docs: "/docs",
   contributing:
-    "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
-  security: "https://github.com/Oluwatosin1808/DevDoctor/security/policy",
-  license: "https://github.com/Oluwatosin1808/DevDoctor/blob/main/LICENSE",
+    "https://github.com/Oluwatosin1808/cDoc/blob/main/CONTRIBUTING.md",
+  security: "https://github.com/Oluwatosin1808/cDoc/security/policy",
+  license: "https://github.com/Oluwatosin1808/cDoc/blob/main/LICENSE",
 };
 ```
 
@@ -119,7 +119,7 @@ read it from there.
 
 ## packages/cli
 
-The `devdoctor` CLI: a zero-dependency, ESM Node ≥20 package that scans a
+The `cdoc` CLI: a zero-dependency, ESM Node ≥20 package that scans a
 project across five check categories (project, dependencies, environment, git,
 security), reduces the findings to a score out of 100, and exits `0`/`1`/`2`
 so CI can gate on it. The marketing site does not depend on this package.

@@ -1,8 +1,8 @@
 {
-  "name": "@devdoctor/web",
+  "name": "@cdoc/web",
   "version": "0.1.0",
   "private": true,
-  "description": "DevDoctor marketing website — Next.js App Router.",
+  "description": "cDoc marketing website — Next.js App Router.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

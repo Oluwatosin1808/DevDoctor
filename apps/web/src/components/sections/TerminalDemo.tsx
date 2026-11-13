@@ -25,7 +25,7 @@ const TONES: Record<Tone, string> = {
 };
 
 const SCRIPT: ScriptLine[] = [
-  { text: "$ devdoctor scan", tone: "prompt", delay: 260 },
+  { text: "$ cdoc scan", tone: "prompt", delay: 260 },
   { text: "Scanning ./acme-web", tone: "muted", delay: 520 },
   { text: "▸ Reading project configuration", tone: "dim", delay: 460 },
   { text: "▸ Checking dependencies", tone: "dim", delay: 440 },
@@ -40,7 +40,7 @@ const SCRIPT: ScriptLine[] = [
   { text: "✓ Security checks", tone: "success", delay: 340 },
   { text: "", tone: "dim", delay: 220 },
   { text: "Scan complete — 2 findings need attention.", tone: "accent", delay: 460 },
-  { text: "Run `devdoctor report` for the full breakdown.", tone: "muted", delay: 420 },
+  { text: "Run `cdoc report` for the full breakdown.", tone: "muted", delay: 420 },
 ];
 
 const REDUCED_MOTION_STATUS =
@@ -117,7 +117,7 @@ export function TerminalDemo() {
               </span>
 
               <span className="scrollbar-slim min-w-0 flex-1 overflow-x-auto font-mono text-[11px] whitespace-nowrap text-dim">
-                ~/projects/acme-web — devdoctor scan
+                ~/projects/acme-web — cdoc scan
               </span>
 
               <span className="hidden rounded-[4px] border border-line-strong bg-overlay px-1.5 py-0.5 font-mono text-[9px] tracking-[0.1em] text-dim uppercase sm:inline">
@@ -128,7 +128,7 @@ export function TerminalDemo() {
             {/* Output */}
             <div
               role="region"
-              aria-label="Simulated DevDoctor terminal output"
+              aria-label="Simulated cDoc terminal output"
               className="scrollbar-slim h-[340px] overflow-y-auto px-4 py-4 sm:h-[366px] sm:px-5"
             >
               <div className="font-mono text-[13px] leading-[1.85] sm:text-sm">
@@ -214,9 +214,9 @@ export function TerminalDemo() {
           {reduceMotion
             ? REDUCED_MOTION_STATUS
             : running
-              ? "DevDoctor scan running."
+              ? "cDoc scan running."
               : done
-                ? "DevDoctor scan complete. Two findings need attention."
+                ? "cDoc scan complete. Two findings need attention."
                 : ""}
         </p>
       </Container>

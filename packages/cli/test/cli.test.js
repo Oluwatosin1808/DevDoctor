@@ -26,7 +26,7 @@ function capture(argv, cwd) {
 }
 
 function withProject(files, run) {
-  const root = mkdtempSync(join(tmpdir(), "devdoctor-test-"));
+  const root = mkdtempSync(join(tmpdir(), "cdoc-test-"));
   try {
     for (const [name, contents] of Object.entries(files)) {
       const target = join(root, name);

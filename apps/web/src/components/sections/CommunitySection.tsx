@@ -23,7 +23,7 @@ export function CommunitySection() {
           <SectionHeading
             align="center"
             title="Good tools get better when developers build together."
-            description="DevDoctor is open source. Explore the code, report issues, suggest improvements or contribute a diagnostic check of your own."
+            description="cDoc is open source. Explore the code, report issues, suggest improvements or contribute a diagnostic check of your own."
           />
 
           <Reveal delay={0.1}>

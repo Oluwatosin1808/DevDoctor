@@ -45,7 +45,7 @@ export function runScan(root) {
   const attention = totals.warn + totals.error;
 
   return {
-    tool: "devdoctor",
+    tool: "cdoc",
     root,
     filesScanned: files.length,
     score,

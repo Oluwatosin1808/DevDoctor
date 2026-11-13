@@ -6,7 +6,7 @@ interface LogoProps {
 }
 
 /**
- * DevDoctor mark: a terminal-ish rounded tile with an ECG trace through it —
+ * cDoc mark: a terminal-ish rounded tile with an ECG trace through it —
  * the doctor metaphor, kept small enough to sit in a 24px nav slot.
  */
 export function Logo({
@@ -47,7 +47,7 @@ export function Logo({
         <span
           className={`text-[15px] leading-none font-medium tracking-[-0.03em] text-foreground ${wordmarkClassName}`}
         >
-          devdoctor
+          cDoc
         </span>
       ) : null}
     </span>

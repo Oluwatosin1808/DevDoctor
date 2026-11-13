@@ -1,19 +1,19 @@
 /**
  * Central site configuration.
  *
- * Everything a template or component needs to know about DevDoctor lives here so
+ * Everything a template or component needs to know about cDoc lives here so
  * copy stays consistent and URLs only ever have to be updated in one place.
  */
 
 export const SITE = {
-  name: "DevDoctor",
-  /** Lowercase wordmark used in the navigation and footer. */
-  wordmark: "devdoctor",
+  name: "cDoc",
+  /** Wordmark used in the navigation and footer. */
+  wordmark: "cDoc",
   tagline: "Your code deserves a regular checkup.",
   shortDescription:
-    "DevDoctor is an open-source command-line tool that examines JavaScript and TypeScript projects for security, configuration, dependency and environment issues.",
+    "cDoc is an open-source command-line tool that examines JavaScript and TypeScript projects for security, configuration, dependency and environment issues.",
   description:
-    "Catch issues before they become problems. DevDoctor examines your project, finds potential problems and tells you exactly where to start fixing them — all from your terminal.",
+    "Catch issues before they become problems. cDoc examines your project, finds potential problems and tells you exactly where to start fixing them — all from your terminal.",
   /** Production origin — feeds canonical, Open Graph, and sitemap URLs. */
   url: "https://web-five-sigma-66.vercel.app",
   locale: "en_US",
@@ -37,13 +37,13 @@ export interface ExternalLinks {
 }
 
 export const LINKS: ExternalLinks = {
-  github: "https://github.com/Oluwatosin1808/DevDoctor",
+  github: "https://github.com/Oluwatosin1808/cDoc",
   npm: "https://www.npmjs.com/package/@oluwat0s1n/devdoctor",
   docs: "/docs",
   contributing:
-    "https://github.com/Oluwatosin1808/DevDoctor/blob/main/CONTRIBUTING.md",
-  security: "https://github.com/Oluwatosin1808/DevDoctor/security/policy",
-  license: "https://github.com/Oluwatosin1808/DevDoctor/blob/main/LICENSE",
+    "https://github.com/Oluwatosin1808/cDoc/blob/main/CONTRIBUTING.md",
+  security: "https://github.com/Oluwatosin1808/cDoc/security/policy",
+  license: "https://github.com/Oluwatosin1808/cDoc/blob/main/LICENSE",
 };
 
 /** In-page navigation targets. Keep in sync with the section ids in `page.tsx`. */
@@ -61,7 +61,7 @@ export const ANCHORS = {
 export const COMMANDS = {
   installGlobal: "npm install -g @oluwat0s1n/devdoctor",
   installNpx: "npx @oluwat0s1n/devdoctor scan",
-  scan: "devdoctor scan",
+  scan: "cdoc scan",
 } as const;
 
 /** A single neutral message for every "coming soon" affordance. */

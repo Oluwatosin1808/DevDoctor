@@ -28,7 +28,7 @@ function ReportPanel() {
           Scan complete
         </span>
         <span className="font-mono text-[10px] tracking-[0.12em] text-dim uppercase">
-          devdoctor
+          cdoc
         </span>
       </div>
 
@@ -112,7 +112,7 @@ export function DiagnosticShowcase() {
               description={
                 <>
                   <p>
-                    DevDoctor doesn’t just flag problems. It helps you
+                    cDoc doesn’t just flag problems. It helps you
                     understand what went wrong, where to look and what to do
                     next.
                   </p>

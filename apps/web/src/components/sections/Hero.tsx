@@ -46,7 +46,7 @@ export function Hero() {
 
         <Reveal delay={0.1}>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            From exposed secrets to broken configurations, DevDoctor examines
+            From exposed secrets to broken configurations, cDoc examines
             your project, finds potential problems and tells you exactly where
             to start fixing them. All from your terminal.
           </p>
@@ -59,7 +59,7 @@ export function Hero() {
               size="lg"
               className="w-full sm:w-auto"
             >
-              Explore DevDoctor
+              Explore cDoc
               <ArrowRight aria-hidden className="size-4" />
             </ButtonLink>
 

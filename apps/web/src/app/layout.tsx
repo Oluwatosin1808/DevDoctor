@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [
-    "DevDoctor",
+    "cDoc",
     "code diagnostics",
     "security scanner",
     "developer tools",

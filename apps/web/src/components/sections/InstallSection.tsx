@@ -28,7 +28,7 @@ export function InstallSection() {
         <SectionHeading
           align="center"
           title="Run your first checkup."
-          description="Add DevDoctor to your workflow and scan a project in under a minute."
+          description="Add cDoc to your workflow and scan a project in under a minute."
         />
 
         <Reveal delay={0.08}>

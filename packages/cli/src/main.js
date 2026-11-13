@@ -12,10 +12,10 @@ const PKG = JSON.parse(
   ),
 );
 
-export const HELP = `devdoctor \u2014 a developer-first diagnostic CLI
+export const HELP = `cdoc \u2014 a developer-first diagnostic CLI
 
 Usage
-  devdoctor [scan] [options]
+  cdoc [scan] [options]
 
 Commands
   scan              Run a diagnostic scan of the current project (default)
@@ -109,7 +109,7 @@ export function main(argv, io = {}) {
   const opts = parseArgs(argv);
 
   if (opts.error) {
-    stderr.write(`${opts.error}\nTry "devdoctor --help" for usage.\n`);
+    stderr.write(`${opts.error}\nTry "cdoc --help" for usage.\n`);
     return 2;
   }
   if (opts.help) {

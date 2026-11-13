@@ -20,14 +20,14 @@ export function SolutionSection() {
             align="center"
             title={
               <>
-                Meet DevDoctor. Your project&apos;s{" "}
+                Meet cDoc. Your project&apos;s{" "}
                 <span className="text-accent">first line of diagnosis</span>.
               </>
             }
             description={
               <>
                 <p>
-                  DevDoctor gives your codebase a structured health check without
+                  cDoc gives your codebase a structured health check without
                   making you dig through dozens of files manually.
                 </p>
                 <p className="mt-4">
