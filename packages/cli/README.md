@@ -82,9 +82,17 @@ Optional finding fields are omitted when they do not apply.
 
 ## Privacy
 
-Scans are read-only and entirely local. No network calls, telemetry, uploads,
-AI APIs or API keys. Symlinks are not followed, path traversal is rejected,
-reads are size-capped, and finding text is redacted for credential-shaped values.
+Scans are read-only and entirely local by default: no network calls, telemetry,
+uploads, AI APIs or API keys. Symlinks are not followed, path traversal is
+rejected, reads are size-capped, and finding text is redacted for
+credential-shaped values.
+
+Optional anonymous usage telemetry is off unless `CDOC_TELEMETRY=1` and
+`CDOC_TELEMETRY_ENDPOINT=<url>` are set. It posts only an anonymous install ID,
+cDoc version, `scan`/`doctor` command, outcome and timestamp. No target path,
+file name, finding, source code or scan result is sent. The ID is stored at
+`~/.cdoc/telemetry-id` (override with `CDOC_TELEMETRY_ID`), and delivery failures
+are ignored. You must provide and host the collector endpoint.
 
 ## Development
 

@@ -1,5 +1,10 @@
 import { readFileSync } from "node:fs";
 import { createDefaultRegistry } from "../checks/index.js";
+import {
+  buildTelemetryPayload,
+  readTelemetrySettings,
+  sendTelemetry,
+} from "../telemetry.js";
 import { HELP, parseArgs, wantsJson, type ParsedArgs } from "./args.js";
 import { CdocError, toErrorStack, toErrorMessage } from "../errors.js";
 import { scanProject } from "../engine/scanner.js";
@@ -27,6 +32,30 @@ function readVersion(): string {
   } catch {
     return "0.0.0";
   }
+}
+
+const VERSION = readVersion();
+const pendingTelemetry: Promise<unknown>[] = [];
+
+/**
+ * Wait for any opted-in telemetry before the process exits. Without this, a
+ * short-lived CLI can terminate before a fire-and-forget request completes.
+ */
+export async function flushTelemetry(): Promise<void> {
+  while (pendingTelemetry.length > 0) {
+    await Promise.allSettled(pendingTelemetry.splice(0));
+  }
+}
+
+function trackCommand(
+  command: "scan" | "doctor",
+  outcome: "completed" | "failed",
+  env: NodeJS.ProcessEnv,
+): void {
+  const settings = readTelemetrySettings(env);
+  if (!settings.enabled || settings.endpoint === null) return;
+  const payload = buildTelemetryPayload(settings, command, outcome, VERSION);
+  pendingTelemetry.push(sendTelemetry(payload, settings.endpoint));
 }
 
 function isTargetError(error: unknown): boolean {
@@ -78,7 +107,7 @@ export function runCli(argv: readonly string[], io: CommandIo): number {
     return 0;
   }
   if (parsed.version) {
-    io.stdout.write(`${readVersion()}\n`);
+    io.stdout.write(`${VERSION}\n`);
     return 0;
   }
 
@@ -97,9 +126,11 @@ export function runCli(argv: readonly string[], io: CommandIo): number {
           parsed.command === "doctor" ? "cDoc doctor" : "cDoc scan",
         );
     io.stdout.write(`${output}\n`);
+    trackCommand(parsed.command, "completed", io.env);
     return exitCode(parsed, report.totals);
   } catch (error) {
     writeError(error, io, json, parsed.verbose);
+    trackCommand(parsed.command, "failed", io.env);
     return isTargetError(error) ? 2 : 1;
   }
 }

@@ -102,6 +102,17 @@ Options
 Exit codes: `0` no failures/errors, `1` failed checks, execution errors, or
 warnings with `--strict`, `2` invalid usage or target.
 
+Optional environment variables for anonymous usage counters (all unset by
+default):
+
+```bash
+CDOC_TELEMETRY=1
+CDOC_TELEMETRY_ENDPOINT=https://your-endpoint.example/collect
+CDOC_TELEMETRY_ID=anon-12345678   # optional stable ID override
+```
+
+You must host the endpoint/dashboard yourself; cDoc does not ship a collector.
+
 ## Example output
 
 ```text
@@ -151,8 +162,13 @@ in JSON mode.
 ## Privacy and local-first principles
 
 - Scans never modify the target project.
-- Source code and results are never uploaded; cDoc has no network or telemetry
-  calls and no AI/API keys.
+- Source code, file paths, findings and scan results are never uploaded. cDoc has
+  no AI/API keys and makes **no network calls by default**.
+- Anonymous usage telemetry is strictly opt-in: set `CDOC_TELEMETRY=1` and
+  `CDOC_TELEMETRY_ENDPOINT=<your HTTPS endpoint>`. Each scan/doctor run then posts
+  only an anonymous install ID, cDoc version, command name, outcome and timestamp
+  — never project data. `CDOC_TELEMETRY_ID` can override the stored anonymous ID.
+  Telemetry failures never change scan output or exit codes.
 - Discovery stays inside the target, does not follow symlinks, and reads only
   `.gitignore` files and files a check genuinely needs.
 - Findings store file paths and labels, never secret values; free text is
