@@ -1,118 +1,97 @@
 # cdoc (CLI)
 
-A developer-first diagnostic CLI for JavaScript and TypeScript projects. It runs
-five categories of checks and reduces the findings to a score out of 100.
-
-```
-$ cdoc scan
-
-cDoc
-Scanning /your/project
-
-Project configuration
-    ✓ package.json is present and parses
-    ✓ package.json declares name, version, description, license
-    ...
-
-────────────────────────────────────────────────────
-Score 96/100 — 1 finding(s) need attention
-17 passed · 1 warnings · 0 errors
-```
-
-## Install
+cDoc is a local-first developer diagnostics CLI. This package is the CLI: strict
+TypeScript, ESM, Node >= 20, and no runtime dependencies. It is **not published
+to npm**; run it from this checkout.
 
 ```bash
-npm install -g @oluwat0s1n/devdoctor
+npm install                       # at the monorepo root
+npm run build --workspace @cdoc/cli
+node packages/cli/bin/cdoc.js scan --no-color
 ```
 
-Or run it without installing:
+After installation, `npx --no-install cdoc` works from the repository root.
 
-```bash
-npx @oluwat0s1n/devdoctor scan
-```
-
-To work on it from source, run `npm install` at the monorepo root, then
-`node packages/cli/bin/cdoc.js scan`.
-
-### Publishing
-
-Maintainers only. Publishes go through npm's normal `2FA` check:
-
-```bash
-cd packages/cli && npm publish      # npm prompts for a one-time code
-```
-
-A granular access token with **Bypass two-factor authentication** also works
-(`npm config set //registry.npmjs.org/:_authToken=...`), which is how this
-package was first released. Note that npm is restricting bypass-2FA tokens for
-direct publishing from **January 2027** — after that, use an OTP code per
-publish, or set up [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
-against a CI workflow.
-
-## Usage
+## Commands
 
 ```
-cdoc [scan] [options]
+cdoc scan [target] [options]
+cdoc doctor [target] [options]
 
-Commands
-  scan              Run a diagnostic scan of the current project (default)
+scan              Run a diagnostic scan (default when no command is given)
+doctor            Run the same checks with a doctor-style heading
 
-Options
-  --cwd <path>      Scan a directory other than the current one
-  --json            Emit machine-readable JSON
-  --strict          Exit non-zero on warnings as well as errors
-  --color           Force ANSI colour on
-  --no-color        Force ANSI colour off
-  -h, --help        Show this help
-  -v, --version     Show the version
-
-Exit codes
-  0                 Scan completed with no errors
-  1                 Errors found, or warnings when --strict is set
-  2                 Invalid usage
+--json            Emit the complete report as JSON on stdout
+--verbose         Include stack traces for errors
+--no-color        Disable ANSI colour
+--color           Force ANSI colour on
+--strict          Exit non-zero when warnings are reported
+--cwd <path>      Legacy alias for the target directory
+-h, --help        Show help
+-v, --version     Show the version
 ```
 
-## What it checks
+Exit codes:
 
-| Category | Looks at |
+| Code | Meaning |
 | --- | --- |
-| **Project configuration** | `package.json` parses, declares `name`/`version`/`description`/`license`, pins `engines.node`, defines scripts, and ships a `tsconfig.json` when TypeScript sources exist |
-| **Dependencies** | A lockfile is present, every dependency range specifies a version, and nothing is declared in both `dependencies` and `devDependencies` |
-| **Environment variables** | `.env` files are git-ignored and untracked, and a committable `.env.example` documents the required variables |
-| **Git configuration** | A repository exists, `.gitignore` covers `node_modules` and `.env`, and no build output is tracked |
-| **Security checks** | No credential-shaped strings (private keys, AWS/GitHub/Slack/npm/Stripe/Google tokens) in tracked files, and no npm script that pipes a download into a shell |
+| 0 | Scan completed with no failed checks or execution errors |
+| 1 | Failed checks, execution errors, or warnings with `--strict` |
+| 2 | Invalid usage, missing path, or target that is not a directory |
 
-Environment files are never read — only whether they exist, whether git ignores
-them, and whether git is tracking them.
+In `--json` mode, errors are also emitted as JSON (`{"tool":"cdoc","ok":false,
+"error":{...}}`) on stdout so CI tools can parse them. Without `--json`, errors
+go to stderr and stack traces appear only with `--verbose`.
 
-## Scoring
+## Architecture
 
-Each finding carries a severity. Errors deduct 12 points, warnings deduct 4, and
-the score is floored at 0.
+- `src/cli/` — argument parsing and command definitions, separated from logic.
+- `src/detection/` — project fingerprinting from real files and package metadata.
+- `src/files/` — safe, deterministic file discovery with `.gitignore` support.
+- `src/engine/` — check registry, isolated runner, and scan orchestration.
+- `src/checks/` — the registered diagnostic checks.
+- `src/findings.ts` — the single factory for standardised, redacted findings.
+- `src/report/` — report aggregation and counts.
+- `src/reporters/` — terminal and JSON output.
 
-| Score | Meaning |
+New checks implement `DiagnosticCheck`, are registered in `src/checks/index.ts`,
+and require no changes to the scanner. Check results use `passed`, `warning`,
+`failed`, `skipped` (not applicable) or `error` (could not complete). Skipped and
+errored checks are never counted as passes.
+
+## Implemented checks
+
+| Check | What it verifies |
 | --- | --- |
-| 90–100 | Healthy |
-| 70–89 | Needs attention |
-| 0–69 | At risk |
+| Project configuration | `package.json` presence and validity, npm scripts where relevant, `tsconfig.json` for TypeScript sources, Node version declaration, and conflicting lockfiles |
+| Git configuration | Repository presence, `.gitignore` coverage of common generated paths, and tracked generated files |
+| Dependencies | Lockfile presence, explicit version ranges, and duplicate declarations |
+| Environment files | Local `.env` files have examples, are ignored by Git, and are not tracked — contents are never read |
+| Security basics | Credential-shaped strings in safe discoverable files and risky npm scripts; values are never printed |
 
-## Design notes
+These are foundational checks, not a complete security or dependency audit.
+There is no health score in this milestone.
 
-- **Zero runtime dependencies** — Node standard library only.
-- **ESM**, Node `>=20`.
-- Prefers `git ls-files` for security scanning (that is what actually leaves
-  your machine) and falls back to a filesystem walk with excluded directories
-  when git is unavailable.
-- Colour is disabled automatically on non-TTY output and when `NO_COLOR` is set.
+## Report model
+
+`cdoc scan --json` returns one JSON object with `schemaVersion: 1`, containing:
+project profile, `scanId`, start/finish times, duration, overall status, check
+counts (`checks`, `passed`, `warning`, `failed`, `skipped`, `error`), discovery
+summary, per-check results, and findings grouped by severity and category.
+Optional finding fields are omitted when they do not apply.
+
+## Privacy
+
+Scans are read-only and entirely local. No network calls, telemetry, uploads,
+AI APIs or API keys. Symlinks are not followed, path traversal is rejected,
+reads are size-capped, and finding text is redacted for credential-shaped values.
 
 ## Development
 
-From the monorepo root:
-
 ```bash
-npm install
-npm run scan --workspace @oluwat0s1n/devdoctor   # run a scan
-npm test  --workspace @oluwat0s1n/devdoctor      # node --test
+npm run build --workspace @cdoc/cli       # tsc -> dist/
+npm run typecheck --workspace @cdoc/cli   # strict type check, no emit
+npm test --workspace @cdoc/cli            # builds, then node --test
 ```
 
-The marketing site in `apps/web` does not depend on this package.
+Tests live in `test/` and use temporary fixture projects via `node:test`.

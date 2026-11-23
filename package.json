@@ -10,10 +10,12 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace @cdoc/web",
-    "build": "npm run build --workspace @cdoc/web",
+    "build": "npm run build --workspace @cdoc/cli && npm run build --workspace @cdoc/web",
     "start": "npm run start --workspace @cdoc/web",
     "lint": "npm run lint --workspace @cdoc/web",
-    "typecheck": "npm run typecheck --workspace @cdoc/web"
+    "typecheck": "npm run typecheck --workspace @cdoc/cli && npm run typecheck --workspace @cdoc/web",
+    "test": "npm test --workspace @cdoc/cli",
+    "scan": "npm run scan --workspace @cdoc/cli"
   },
   "engines": {
     "node": ">=20"

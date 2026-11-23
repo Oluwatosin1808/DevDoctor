@@ -1,18 +1,16 @@
 {
-  "name": "@oluwat0s1n/devdoctor",
+  "name": "@cdoc/cli",
   "version": "0.1.0",
-  "description": "cDoc — a developer-first diagnostic CLI that scans JavaScript and TypeScript projects for configuration, dependency, environment, git and security issues.",
+  "private": true,
+  "description": "cDoc — a local-first diagnostic CLI foundation for JavaScript and TypeScript projects.",
   "license": "MIT",
   "type": "module",
   "bin": {
     "cdoc": "./bin/cdoc.js"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "bin",
-    "src",
+    "dist",
     "README.md"
   ],
   "repository": {
@@ -28,17 +26,20 @@
     "node": ">=20"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "scan": "node ./bin/cdoc.js scan",
-    "test": "node --test test/cli.test.js",
-    "prepublishOnly": "node ./bin/cdoc.js --version"
+    "test": "node --test \"test/*.test.js\"",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
   },
   "keywords": [
     "cli",
     "diagnostics",
-    "security",
-    "lint",
-    "code-quality",
-    "dependencies",
+    "local-first",
     "javascript",
     "typescript"
   ]

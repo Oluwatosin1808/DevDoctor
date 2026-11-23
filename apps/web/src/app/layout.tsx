@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -79,6 +80,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
 
         <SiteFooter />
+
+        <Analytics />
       </body>
     </html>
   );
