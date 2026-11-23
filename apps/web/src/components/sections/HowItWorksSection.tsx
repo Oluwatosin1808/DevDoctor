@@ -7,22 +7,25 @@ import { ANCHORS, COMMANDS } from "@/lib/site";
 const STEPS = [
   {
     number: "01",
-    title: "Install cDoc",
-    body: "Add cDoc to your development workflow using npm.",
-    command: COMMANDS.installGlobal,
-    caption: "Installs the CLI globally.",
+    title: "Start from the checkout",
+    body:
+      "Clone the repository, install workspace dependencies and build the CLI. There is no npm install claim or account to create.",
+    command: COMMANDS.startFromSource,
+    caption: "Run once from a directory of your choice.",
   },
   {
     number: "02",
-    title: "Run your checkup",
-    body: "Navigate to your project and let cDoc examine its configuration.",
+    title: "Point it at a project",
+    body:
+      "Run the binary against any JavaScript or TypeScript project. Add a path to scan a different directory.",
     command: COMMANDS.scan,
-    caption: "Scans the project in your current directory.",
+    caption: "Read-only by default. No source code is uploaded.",
   },
   {
     number: "03",
-    title: "Review. Fix. Ship.",
-    body: "Understand your findings, follow the recommendations and get back to building.",
+    title: "Read the ledger",
+    body:
+      "Review checks, findings and recommended next steps. Decide what deserves attention; cDoc never rewrites your files.",
     command: null,
     caption: null,
   },
@@ -30,47 +33,37 @@ const STEPS = [
 
 export function HowItWorksSection() {
   return (
-    <Section id={ANCHORS.howItWorks} tone="panel">
+    <Section id={ANCHORS.howItWorks} tone="forest">
       <SectionHeading
-        title="Three steps to a healthier codebase."
+        eyebrow="How it works"
+        tone="dark"
+        title="From unfamiliar codebase to informed decisions."
+        description="Three steps, one local command, and a report you can read without a dashboard."
       />
 
       <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
         {STEPS.map((step, index) => (
-          <li key={step.number} className="relative">
-            <Reveal delay={index * 0.09} className="flex h-full flex-col">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-medium tracking-[0.16em] text-accent">
-                  {step.number}
-                </span>
-                <span
-                  aria-hidden
-                  className="h-px flex-1 bg-gradient-to-r from-accent/40 to-transparent"
-                />
-              </div>
-
-              <h3 className="mt-5 text-lg font-medium tracking-tight text-foreground">
+          <li key={step.number} className="min-w-0 border-t border-rule-dark pt-6">
+            <Reveal delay={index * 0.06} className="flex h-full flex-col">
+              <p className="font-mono text-[11px] font-medium tracking-[0.16em] text-lime tabular">
+                {step.number}
+              </p>
+              <h3 className="mt-5 text-lg leading-7 font-medium tracking-[-0.02em] text-dark-ink">
                 {step.title}
               </h3>
+              <p className="mt-2.5 mb-6 text-[14px] leading-6 text-dark-muted">{step.body}</p>
 
-              {/* `mb-6` keeps the original spacing when the row is too short
-                  for `mt-auto` to have any free space to distribute. */}
-              <p className="mt-2.5 mb-6 text-sm leading-relaxed text-muted">
-                {step.body}
-              </p>
-
-              {/* Pinned to the bottom of the column so the command blocks line
-                  up across all three steps despite differing copy lengths. */}
-              <div className="mt-auto">
+              <div className="mt-auto min-w-0">
                 {step.command ? (
                   <CommandBlock
                     command={step.command}
-                    caption={step.caption}
+                    caption={step.caption ?? undefined}
                     copyLabel={`Copy step ${step.number} command`}
+                    tone="dark"
                   />
                 ) : (
-                  <p className="font-mono text-[12px] text-dim">
-                    No configuration required.
+                  <p className="font-mono text-[11px] tracking-[0.06em] text-dark-muted uppercase">
+                    Findings, not prescriptions.
                   </p>
                 )}
               </div>

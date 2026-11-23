@@ -1,17 +1,20 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "darkSecondary";
 type Size = "sm" | "md" | "lg";
 
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium tracking-tight whitespace-nowrap transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-lg font-medium tracking-tight whitespace-nowrap transition-[color,background-color,border-color] duration-150 outline-none disabled:pointer-events-none disabled:opacity-40";
 
 const VARIANTS: Record<Variant, string> = {
   primary:
-    "bg-accent text-accent-ink hover:bg-accent-strong shadow-[inset_0_1px_0_0_rgba(255,255,255,0.28),0_8px_24px_-12px_rgba(182,243,106,0.7)]",
+    "bg-lime text-lime-ink hover:bg-[#d7f9a5] active:translate-y-px focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
   secondary:
-    "border border-line-strong bg-raised text-foreground hover:border-[#39404a] hover:bg-overlay",
-  ghost: "text-muted hover:bg-white/5 hover:text-foreground",
+    "border border-rule bg-paper text-ink hover:border-ink/40 active:translate-y-px focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
+  ghost:
+    "text-muted hover:text-ink hover:underline hover:underline-offset-4 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
+  darkSecondary:
+    "border border-rule-dark bg-transparent text-dark-ink hover:border-lime active:translate-y-px focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal",
 };
 
 const SIZES: Record<Size, string> = {
@@ -54,10 +57,7 @@ type ButtonLinkProps = ComponentPropsWithoutRef<"a"> & {
   size?: Size;
 };
 
-/**
- * Anchor styled as a button. Deliberately a plain `<a>`: this is a single page
- * and hash links should hand control to the browser's smooth scrolling.
- */
+/** Anchor styled as a button so in-page links keep native hash navigation. */
 export function ButtonLink({
   variant = "primary",
   size = "md",

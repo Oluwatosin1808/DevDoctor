@@ -1,93 +1,68 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import { TerminalDemo } from "@/components/sections/TerminalDemo";
 import { ButtonLink } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { ExternalAction } from "@/components/ui/ExternalAction";
 import { Reveal } from "@/components/ui/Reveal";
-import { LINKS } from "@/lib/site";
-
-const TRUST_LINE = ["Open source", "Developer-first", "Local-first"];
+import { HERO, LINKS } from "@/lib/site";
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden pt-14 pb-14 sm:pt-[88px] sm:pb-20 lg:pt-[120px]"
-    >
-      {/* Backdrop: faint engineering grid + a single lime bloom. */}
-      <div
-        aria-hidden
-        className="bg-grid mask-radial pointer-events-none absolute inset-0 -z-10 opacity-80"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-56 left-1/2 -z-10 h-[520px] w-[min(900px,140%)] -translate-x-1/2 rounded-full bg-accent/8 blur-[130px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-surface"
-      />
+    <>
+      <section id="top" className="bg-canvas pt-[72px] pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-24">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:items-end lg:gap-16">
+            <div>
+              <Reveal>
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium tracking-[0.18em] text-muted uppercase">
+                  <span aria-hidden className="size-1.5 shrink-0 bg-lime" />
+                  {HERO.eyebrow}
+                </p>
+              </Reveal>
 
-      <div className="mx-auto w-full max-w-4xl px-5 text-center sm:px-6">
-        <Reveal delay={0}>
-          <h1
-            id="hero-heading"
-            className="text-[2.5rem] leading-[1.03] font-medium tracking-[-0.035em] text-balance text-foreground sm:text-6xl lg:text-[4.25rem]"
-          >
-            Your code deserves a{" "}
-            <span className="text-accent">regular checkup</span>.
-          </h1>
-        </Reveal>
+              <Reveal delay={0.06}>
+                <h1 className="mt-7 max-w-[18ch] text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.02] font-medium tracking-[-0.045em] text-balance text-ink">
+                  {HERO.headline}
+                </h1>
+              </Reveal>
+            </div>
 
-        <Reveal delay={0.06}>
-          <p className="mt-6 text-lg font-medium tracking-tight text-foreground sm:text-xl">
-            Catch issues before they become problems.
-          </p>
-        </Reveal>
+            <div className="lg:pb-2">
+              <Reveal delay={0.12}>
+                <p className="max-w-xl text-[17px] leading-8 text-ink/80 sm:text-lg">
+                  {HERO.supporting}
+                </p>
+              </Reveal>
 
-        <Reveal delay={0.1}>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            From exposed secrets to broken configurations, cDoc examines
-            your project, finds potential problems and tells you exactly where
-            to start fixing them. All from your terminal.
-          </p>
-        </Reveal>
+              <Reveal delay={0.18}>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <ButtonLink href={`#demo`} size="lg" className="w-full sm:w-auto">
+                    {HERO.primaryCta}
+                    <ArrowDown aria-hidden className="size-4" />
+                  </ButtonLink>
 
-        <Reveal delay={0.16}>
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink
-              href="#install"
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              Explore cDoc
-              <ArrowRight aria-hidden className="size-4" />
-            </ButtonLink>
+                  <ExternalAction
+                    linkKey="github"
+                    href={LINKS.github}
+                    showSoonChip={false}
+                    className="inline-flex h-12 w-full items-center justify-center gap-1.5 rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium text-ink transition-colors duration-150 hover:border-ink/40 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none sm:w-auto"
+                  >
+                    {HERO.secondaryCta}
+                  </ExternalAction>
+                </div>
+              </Reveal>
 
-            <ExternalAction
-              linkKey="github"
-              href={LINKS.github}
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-line-strong bg-raised px-5 text-[15px] font-medium tracking-tight text-foreground transition-colors duration-200 hover:border-[#39404a] hover:bg-overlay focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface focus-visible:outline-none sm:w-auto"
-            >
-              View on GitHub
-            </ExternalAction>
+              <Reveal delay={0.24}>
+                <p className="mt-8 font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
+                  {HERO.labels.join(" · ")}
+                </p>
+              </Reveal>
+            </div>
           </div>
-        </Reveal>
+        </Container>
+      </section>
 
-        <Reveal delay={0.22}>
-          <p className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[11px] tracking-[0.12em] text-dim uppercase">
-            {TRUST_LINE.map((item, index) => (
-              <span key={item} className="inline-flex items-center gap-3">
-                {index > 0 ? (
-                  <span aria-hidden className="text-line-strong">
-                    ·
-                  </span>
-                ) : null}
-                {item}
-              </span>
-            ))}
-          </p>
-        </Reveal>
-      </div>
-    </section>
+      <TerminalDemo />
+    </>
   );
 }

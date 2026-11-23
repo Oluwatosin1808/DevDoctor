@@ -9,6 +9,7 @@ interface CopyButtonProps {
   label?: string;
   className?: string;
   size?: "sm" | "md";
+  tone?: "light" | "dark";
 }
 
 async function writeToClipboard(value: string): Promise<boolean> {
@@ -44,6 +45,7 @@ export function CopyButton({
   label = "Copy",
   className = "",
   size = "md",
+  tone = "light",
 }: CopyButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "failed">("idle");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -63,10 +65,7 @@ export function CopyButton({
   }
 
   const copied = status === "copied";
-  const box =
-    size === "sm"
-      ? "size-8 rounded-md"
-      : "size-9 rounded-lg border border-line bg-panel";
+  const box = size === "sm" ? "size-8 rounded-md" : "size-9 rounded-lg";
 
   return (
     <span className="relative inline-flex shrink-0 items-center">
@@ -76,8 +75,10 @@ export function CopyButton({
         aria-label={`${label}: ${value}`}
         className={[
           "inline-flex shrink-0 items-center justify-center transition-colors duration-150",
-          "text-dim hover:bg-white/5 hover:text-foreground",
-          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface focus-visible:outline-none",
+          tone === "dark"
+            ? "text-dark-muted hover:bg-white/5 hover:text-lime"
+            : "text-muted hover:bg-canvas hover:text-ink",
+          "focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2",
           box,
           className,
         ]
@@ -85,7 +86,7 @@ export function CopyButton({
           .join(" ")}
       >
         {copied ? (
-          <Check aria-hidden className="size-4 text-accent" />
+          <Check aria-hidden className="size-4 text-lime" />
         ) : (
           <Copy aria-hidden className="size-4" />
         )}
@@ -100,7 +101,7 @@ export function CopyButton({
       </span>
 
       {status === "failed" ? (
-        <span className="pointer-events-none absolute top-full right-0 z-20 mt-2 w-max rounded-md border border-line bg-overlay px-2.5 py-1.5 font-mono text-[11px] text-muted shadow-lg">
+        <span className="pointer-events-none absolute top-full right-0 z-20 mt-2 w-max rounded-md border border-rule bg-paper px-2.5 py-1.5 font-mono text-[11px] text-ink">
           Press Ctrl+C to copy
         </span>
       ) : null}

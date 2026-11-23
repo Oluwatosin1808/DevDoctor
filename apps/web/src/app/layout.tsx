@@ -7,7 +7,8 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const TITLE = `${SITE.name} — ${SITE.tagline}`;
+const TITLE = `${SITE.name} — Local-first developer diagnostics`;
+const DESCRIPTION = `${SITE.tagline} ${SITE.description}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -15,18 +16,17 @@ export const metadata: Metadata = {
     default: TITLE,
     template: `%s · ${SITE.name}`,
   },
-  description: SITE.description,
+  description: DESCRIPTION,
   applicationName: SITE.name,
   keywords: [
     "cDoc",
-    "code diagnostics",
-    "security scanner",
-    "developer tools",
-    "CLI",
+    "developer diagnostics",
+    "codebase health",
+    "local-first CLI",
     "JavaScript",
     "TypeScript",
-    "dependency health",
-    "environment validation",
+    "dependency checks",
+    "environment checks",
     "open source",
   ],
   authors: [{ name: SITE.name }],
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     url: SITE.url,
     siteName: SITE.name,
     title: TITLE,
-    description: SITE.description,
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
-    description: SITE.description,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -54,12 +54,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090a",
-  colorScheme: "dark",
+  themeColor: "#F5F6F0",
+  colorScheme: "light",
 };
 
 const SKIP_LINK_CLASS =
-  "fixed top-4 left-4 z-[60] -translate-y-[calc(100%+3rem)] rounded-lg bg-accent px-4 py-2.5 text-sm font-medium tracking-tight text-accent-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.8)] transition-transform duration-150 focus:translate-y-0 focus:outline-none";
+  "fixed top-4 left-4 z-[60] -translate-y-[calc(100%+3rem)] rounded-lg bg-lime px-4 py-2.5 text-sm font-medium text-lime-ink transition-transform duration-150 focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${GeistSans.variable} ${GeistMono.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col bg-surface font-sans text-foreground antialiased">
+      <body className="flex min-h-full flex-col bg-canvas font-sans text-ink antialiased">
         <a href="#main" className={SKIP_LINK_CLASS}>
           Skip to content
         </a>

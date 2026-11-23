@@ -10,37 +10,37 @@ const FAQS = [
   {
     question: "What exactly is cDoc?",
     answer:
-      "cDoc is an open-source command-line tool that scans JavaScript and TypeScript projects for common security, configuration, dependency and environment issues.",
+      "cDoc is a local-first, open-source command-line tool that reads JavaScript and TypeScript projects and reports configuration, dependency, environment, Git and basic security signals.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "No. cDoc runs from your terminal — there is no sign-up, no dashboard to log into and no API key to manage.",
+      "No. A local scan needs no sign-up, no dashboard, no API key and no AI service. You run the CLI from your own machine.",
   },
   {
     question: "Does cDoc modify my code?",
     answer:
-      "No. cDoc reports what it finds and explains what to look at. It never rewrites files on your behalf, so nothing in your project changes unless you decide to act on a recommendation.",
+      "No. cDoc is read-only by default. It reports findings and recommended next steps; it never rewrites your files or applies fixes for you.",
   },
   {
     question: "Which frameworks does it support?",
     answer:
-      "cDoc works at the project level rather than per framework: it reads your package.json, configuration files and environment examples. That keeps it framework-agnostic across JavaScript and TypeScript projects instead of tying it to one stack.",
+      "Detection uses dependency and script evidence to recognise React, Next.js, Vue, Angular, Vite, Express and Node.js. Configuration files alone are not treated as proof that a framework is used.",
   },
   {
     question: "Does cDoc send my source code anywhere?",
     answer:
-      "No. Diagnostics run locally on your machine. Your source code is not uploaded and is not sent to an AI service. Any check that needs the network will be explicitly opt-in and clearly labelled.",
+      "No. Source code, file paths and findings are not uploaded. Optional network-dependent checks may query public package or vulnerability data, but they are explicit and opt-in. Anonymous usage counters are also opt-in and require an endpoint you control.",
   },
   {
     question: "Is cDoc free?",
     answer:
-      "Yes. cDoc is open source and released under the MIT License. Use it on as many projects as you like.",
+      "Yes. cDoc is MIT licensed and open source. The CLI is run from this repository's checkout; there is no npm install claim on this site.",
   },
   {
     question: "Can I use cDoc in CI/CD?",
     answer:
-      "cDoc is built to run non-interactively, which makes it a natural fit for a pipeline. Step-by-step CI/CD recipes will ship with the public documentation, which isn’t live yet.",
+      "The CLI emits JSON with --json, exits non-zero on errors and supports --strict for warnings. Full CI recipes are planned documentation, not shipped in this milestone.",
   },
 ] as const;
 
@@ -48,20 +48,22 @@ export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <Section id={ANCHORS.faq}>
+    <Section id={ANCHORS.faq} tone="canvas">
       <SectionHeading
-        title="Before you run your first checkup."
+        eyebrow="Questions"
+        title="Before you run your first diagnostic pass."
+        description="The practical answers, without the marketing gloss."
       />
 
       <div className="mt-12 max-w-3xl">
-        <ul className="divide-y divide-line border-y border-line">
+        <ul className="border-t border-rule">
           {FAQS.map((item, index) => {
             const open = openIndex === index;
             const buttonId = `faq-button-${index}`;
             const panelId = `faq-panel-${index}`;
 
             return (
-              <li key={item.question}>
+              <li key={item.question} className="border-b border-rule">
                 <h3>
                   <button
                     type="button"
@@ -69,23 +71,19 @@ export function FaqSection() {
                     aria-expanded={open}
                     aria-controls={panelId}
                     onClick={() => setOpenIndex(open ? null : index)}
-                    className="group flex w-full items-center justify-between gap-6 py-5 text-left transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-surface focus-visible:outline-none"
+                    className="group flex w-full items-start gap-4 py-5 text-left transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none sm:gap-6"
                   >
-                    <span
-                      className={[
-                        "text-[15px] font-medium tracking-tight transition-colors duration-150 sm:text-base",
-                        open ? "text-foreground" : "text-foreground/85",
-                      ].join(" ")}
-                    >
+                    <span className="hidden pt-1 font-mono text-[11px] text-muted tabular sm:block">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0 flex-1 text-[15px] leading-6 font-medium tracking-[-0.01em] text-ink sm:text-base">
                       {item.question}
                     </span>
-
                     <ChevronDown
                       aria-hidden
-                      className={[
-                        "size-4.5 shrink-0 text-dim transition-transform duration-300 group-hover:text-accent",
-                        open ? "rotate-180 text-accent" : "",
-                      ].join(" ")}
+                      className={`mt-0.5 size-4 shrink-0 text-muted transition-transform duration-200 group-hover:text-ink ${
+                        open ? "rotate-180 text-ink" : ""
+                      }`}
                     />
                   </button>
                 </h3>
@@ -95,13 +93,12 @@ export function FaqSection() {
                   role="region"
                   aria-labelledby={buttonId}
                   aria-hidden={!open}
-                  className={[
-                    "grid transition-[grid-template-rows] duration-300 ease-out",
-                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-                  ].join(" ")}
+                  className={`grid transition-[grid-template-rows] duration-200 ease-out ${
+                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="max-w-2xl pr-8 pb-5 text-sm leading-relaxed text-muted">
+                    <p className="max-w-2xl border-l-2 border-lime py-1 pl-4 pb-6 text-[14px] leading-6 text-ink/75 sm:ml-10">
                       {item.answer}
                     </p>
                   </div>

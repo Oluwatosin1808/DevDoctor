@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Geist Sans + Geist Mono (self-hosted via the `geist` package, applied on <html>)
+   Geist Sans + Geist Mono are self-hosted by the `geist` package on <html>.
 --------------------------------------------------------------------------- */
 @theme inline {
   --font-sans:
@@ -13,46 +13,47 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Design tokens — near-black surfaces, electric lime accent, muted type
+   Exact cDoc palette. Lime is a fill on light surfaces and a mark on dark.
 --------------------------------------------------------------------------- */
 @theme {
-  /* Surfaces */
-  --color-surface: #08090a;
-  --color-panel: #0b0c0e;
-  --color-raised: #101216;
-  --color-overlay: #16191e;
+  --color-lime: #c5f477;
+  --color-lime-ink: #101510;
+  --color-charcoal: #101510;
+  --color-forest: #1b241d;
+  --color-canvas: #f5f6f0;
+  --color-paper: #ffffff;
+  --color-ink: #171c17;
+  --color-muted: #7b8378;
+  --color-rule: #e2e6dc;
+  --color-rule-dark: #344336;
+  --color-dark-ink: #f5f6f0;
+  --color-dark-muted: #9ba69a;
+  --color-warning: #e0b15a;
+  --color-success: #a7d98a;
+  --color-danger: #f2a28f;
 
-  /* Hairlines */
-  --color-line: #1b1e23;
-  --color-line-strong: #292e36;
-
-  /* Typography */
-  --color-foreground: #ebeef1;
-  --color-muted: #98a0aa;
-  --color-dim: #7d848e;
-
-  /* Accent */
-  --color-accent: #b6f36a;
-  --color-accent-strong: #cbff8d;
-  --color-accent-ink: #0a1403;
-
-  /* Semantic */
-  --color-success: #8fd98f;
-  --color-warning: #f2c14e;
-  --color-danger: #ff8080;
+  /* Backwards-compatible aliases used by older routes during the redesign. */
+  --color-surface: #f5f6f0;
+  --color-panel: #ffffff;
+  --color-raised: #f5f6f0;
+  --color-overlay: #e2e6dc;
+  --color-foreground: #171c17;
+  --color-dim: #7b8378;
+  --color-line: #e2e6dc;
+  --color-line-strong: #c9d0c4;
+  --color-accent: #c5f477;
+  --color-accent-strong: #d7f9a5;
+  --color-accent-ink: #101510;
 }
 
-/* ---------------------------------------------------------------------------
-   Base
---------------------------------------------------------------------------- */
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
     --header-height: 4rem;
   }
 
   * {
-    border-color: var(--color-line);
+    border-color: var(--color-rule);
   }
 
   html {
@@ -61,8 +62,8 @@
   }
 
   body {
-    background-color: var(--color-surface);
-    color: var(--color-foreground);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
     font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
@@ -72,14 +73,19 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-accent-ink);
+    background-color: var(--color-lime);
+    color: var(--color-lime-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid currentColor;
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  [data-theme="dark"] :focus-visible,
+  [data-theme="dark"] {
+    outline-color: var(--color-lime);
   }
 
   /* Anchored sections clear the sticky header. */
@@ -93,56 +99,35 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Utilities
+   Small utilities
 --------------------------------------------------------------------------- */
 @layer utilities {
-  /* Faint engineering grid used behind the hero. */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  }
-
-  .mask-fade-t {
-    mask-image: linear-gradient(to top, #000 55%, transparent 100%);
-  }
-
-  .mask-radial {
-    mask-image: radial-gradient(
-      ellipse 75% 65% at 50% 0%,
-      #000 35%,
-      transparent 100%
-    );
-  }
-
-  /* Thin, quiet scrollbars — matches the rest of the chrome. */
   .scrollbar-slim {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-line-strong) transparent;
+    scrollbar-color: var(--color-rule-dark) transparent;
   }
 
   .scrollbar-slim::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   .scrollbar-slim::-webkit-scrollbar-thumb {
-    background-color: var(--color-line-strong);
+    background-color: var(--color-rule-dark);
     border-radius: 9999px;
   }
 
   .scrollbar-slim::-webkit-scrollbar-track {
     background: transparent;
   }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 /* ---------------------------------------------------------------------------
-   Motion
+   Motion — only the terminal caret and small state transitions animate.
 --------------------------------------------------------------------------- */
 @keyframes caret-blink {
   0%,
@@ -162,22 +147,6 @@
   animation: caret-blink 1.05s steps(1, end) infinite;
 }
 
-@keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.45;
-    transform: scale(0.82);
-  }
-}
-
-.animate-pulse-dot {
-  animation: pulse-dot 1.6s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -190,5 +159,10 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .animate-caret {
+    animation: none;
+    opacity: 1;
   }
 }

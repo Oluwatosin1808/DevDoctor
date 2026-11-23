@@ -10,15 +10,15 @@ export default function NotFound() {
   return (
     <section className="flex flex-1 items-center justify-center px-5 py-28 sm:px-6">
       <div className="mx-auto max-w-lg text-center">
-        <p className="font-mono text-[11px] font-medium tracking-[0.18em] text-accent uppercase">
+        <p className="font-mono text-[11px] font-medium tracking-[0.18em] text-muted uppercase">
           Error 404
         </p>
 
-        <h1 className="mt-4 text-3xl font-medium tracking-[-0.025em] text-balance text-foreground sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-medium tracking-[-0.025em] text-balance text-ink sm:text-4xl">
           This page needs a checkup.
         </h1>
 
-        <p className="mt-4 text-base leading-relaxed text-muted">
+        <p className="mt-4 text-base leading-relaxed text-ink/75">
           The page you&apos;re looking for doesn&apos;t exist. Head back to the
           homepage and try again.
         </p>

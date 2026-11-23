@@ -6,8 +6,7 @@ interface LogoProps {
 }
 
 /**
- * cDoc mark: a terminal-ish rounded tile with an ECG trace through it —
- * the doctor metaphor, kept small enough to sit in a 24px nav slot.
+ * cDoc mark: a charcoal terminal tile with an ECG trace in the exact lime accent.
  */
 export function Logo({
   className = "size-7",
@@ -23,30 +22,12 @@ export function Logo({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x="0.75"
-          y="0.75"
-          width="22.5"
-          height="22.5"
-          rx="6.5"
-          fill="#0d1107"
-          stroke="#B6F36A"
-          strokeOpacity="0.55"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M5 12h3l2-4 3 8 2-4h4"
-          stroke="#B6F36A"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="6.5" fill="#101510" stroke="#C5F477" strokeOpacity="0.6" strokeWidth="1.5" />
+        <path d="M5 12h3l2-4 3 8 2-4h4" stroke="#C5F477" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
 
       {showWordmark ? (
-        <span
-          className={`text-[15px] leading-none font-medium tracking-[-0.03em] text-foreground ${wordmarkClassName}`}
-        >
+        <span className={`text-base leading-none font-semibold tracking-[-0.03em] ${wordmarkClassName}`}>
           cDoc
         </span>
       ) : null}

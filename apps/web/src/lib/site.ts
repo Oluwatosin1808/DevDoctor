@@ -1,76 +1,90 @@
 /**
  * Central site configuration.
  *
- * Everything a template or component needs to know about cDoc lives here so
- * copy stays consistent and URLs only ever have to be updated in one place.
+ * Copy, navigation targets and external destinations live here so every
+ * component tells the same story. When a destination is not confirmed, it is
+ * `null` and the UI says so instead of linking somewhere invented.
  */
 
 export const SITE = {
   name: "cDoc",
-  /** Wordmark used in the navigation and footer. */
   wordmark: "cDoc",
-  tagline: "Your code deserves a regular checkup.",
+  tagline: "Understand your codebase. Discover its problems. Know what to fix next.",
   shortDescription:
-    "cDoc is an open-source command-line tool that examines JavaScript and TypeScript projects for security, configuration, dependency and environment issues.",
+    "A local-first, open-source diagnostics CLI for JavaScript and TypeScript projects.",
   description:
-    "Catch issues before they become problems. cDoc examines your project, finds potential problems and tells you exactly where to start fixing them — all from your terminal.",
+    "cDoc reads your project, surfaces configuration, dependency, environment and security signals, and shows what needs attention — without uploading your source code.",
   /** Production origin — feeds canonical, Open Graph, and sitemap URLs. */
   url: "https://web-five-sigma-66.vercel.app",
   locale: "en_US",
   year: 2026,
 } as const;
 
+/** Exact hero copy, kept together so it stays exact. */
+export const HERO = {
+  eyebrow: "OPEN-SOURCE DEVELOPER DIAGNOSTICS",
+  headline: "Your codebase has a story. Know what it's telling you.",
+  supporting:
+    "Understand your project. Catch hidden problems. Know exactly what needs attention.",
+  primaryCta: "Explore cDoc",
+  secondaryCta: "View on GitHub",
+  labels: ["Local-first", "Open source", "Developer-first"],
+} as const;
+
 /**
  * External destinations.
  *
- * A `null` value is deliberate: components render an explicit "coming soon"
- * state instead of linking to a URL that would 404. Flipping a key to a real
- * absolute URL switches every control that uses it to a normal link.
+ * The GitHub URL is the repository's actual origin. The docs route is local to
+ * this app. There is deliberately no npm destination: the CLI is run from this
+ * checkout and no install claim is made on the site.
  */
 export interface ExternalLinks {
-  github: string | null;
-  npm: string | null;
-  docs: string | null;
-  contributing: string | null;
-  security: string | null;
-  license: string | null;
+  github: string;
+  docs: string;
+  contributing: string;
+  security: string;
+  license: string;
 }
 
+const GITHUB_REPO = "https://github.com/Oluwatosin1808/DevDoctor";
+
 export const LINKS: ExternalLinks = {
-  github: "https://github.com/Oluwatosin1808/cDoc",
-  npm: "https://www.npmjs.com/package/@oluwat0s1n/devdoctor",
+  github: GITHUB_REPO,
   docs: "/docs",
-  contributing:
-    "https://github.com/Oluwatosin1808/cDoc/blob/main/CONTRIBUTING.md",
-  security: "https://github.com/Oluwatosin1808/cDoc/security/policy",
-  license: "https://github.com/Oluwatosin1808/cDoc/blob/main/LICENSE",
+  contributing: `${GITHUB_REPO}/blob/main/CONTRIBUTING.md`,
+  security: `${GITHUB_REPO}/blob/main/SECURITY.md`,
+  license: `${GITHUB_REPO}/blob/main/LICENSE`,
 };
 
 /** In-page navigation targets. Keep in sync with the section ids in `page.tsx`. */
 export const ANCHORS = {
+  demo: "demo",
   problem: "problem",
+  solution: "solution",
   features: "features",
   howItWorks: "how-it-works",
-  diagnostics: "diagnostics",
+  findings: "findings",
+  privacy: "privacy",
   openSource: "open-source",
-  install: "install",
   faq: "faq",
+  getStarted: "get-started",
 } as const;
 
-/** Installation commands shown in the how-it-works and install sections. */
+/** Real commands that work from a local checkout of this repository. */
 export const COMMANDS = {
-  installGlobal: "npm install -g @oluwat0s1n/devdoctor",
-  installNpx: "npx @oluwat0s1n/devdoctor scan",
-  scan: "cdoc scan",
+  clone: `git clone ${GITHUB_REPO}.git`,
+  setup: "cd DevDoctor && npm install",
+  build: "npm run build",
+  startFromSource: `git clone ${GITHUB_REPO}.git && cd DevDoctor && npm install && npm run build`,
+  scan: "node packages/cli/bin/cdoc.js scan",
+  scanRepo: "npm run scan",
 } as const;
 
-/** A single neutral message for every "coming soon" affordance. */
+/** Fallback copy for any destination that is ever unset. */
 export const COMING_SOON_MESSAGES = {
-  github: "The GitHub repository isn’t public yet — it’s coming soon.",
-  npm: "The npm package hasn’t been published yet — it’s coming soon.",
-  docs: "The documentation isn’t live yet — it’s coming soon.",
-  contributing:
-    "The contribution guide isn’t published yet — it’s coming soon.",
-  security: "The security policy isn’t published yet — it’s coming soon.",
-  license: "The LICENSE file will be published with the first release.",
+  github: "The repository link isn’t configured yet.",
+  docs: "The documentation link isn’t configured yet.",
+  contributing: "The contribution guide isn’t configured yet.",
+  security: "The security policy isn’t configured yet.",
+  license: "The license link isn’t configured yet.",
 } as const;

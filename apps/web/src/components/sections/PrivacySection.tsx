@@ -1,82 +1,64 @@
-import { Ban, FileX, HardDrive } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ANCHORS } from "@/lib/site";
 
 const POINTS = [
   {
-    icon: Ban,
-    title: "No account required.",
-    body: "No sign-up, no dashboard, no API key to manage.",
+    index: "01",
+    title: "Local by default",
+    body: "Diagnostics run on your machine against files you choose. No account, dashboard or AI key is needed for a local scan.",
   },
   {
-    icon: HardDrive,
-    title: "Local-first diagnostics.",
-    body: "Scans run on your machine, against your files.",
+    index: "02",
+    title: "Read-only by design",
+    body: "cDoc reports findings and recommended next steps. It does not rewrite your source files or apply fixes for you.",
   },
   {
-    icon: FileX,
-    title: "No automatic file modifications.",
-    body: "cDoc reports. You decide what changes.",
+    index: "03",
+    title: "No source-code uploads",
+    body: "Source code, file paths and findings are not uploaded. Credential-shaped text is redacted before it reaches a report.",
+  },
+  {
+    index: "04",
+    title: "Opt-in connections only",
+    body: "Optional, network-dependent checks may query public package or vulnerability data. They will be explicit and opt-in; none are required for a local scan.",
   },
 ] as const;
 
 export function PrivacySection() {
   return (
-    <Section id="privacy">
-      <div className="overflow-hidden rounded-2xl border border-line bg-panel">
-        <div className="grid gap-10 p-7 sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:p-12">
-          <SectionHeading
-            title="Your codebase isn’t ours to collect."
-            description={
-              <>
-                <p>
-                  cDoc is designed to run locally. Your project files stay
-                  on your machine, and the initial diagnostic experience
-                  doesn’t require an account or send your source code to an AI
-                  service.
-                </p>
-                <p className="mt-4">
-                  You stay in control of what gets scanned, what gets reported
-                  and what gets changed.
-                </p>
-              </>
-            }
-          />
+    <Section id={ANCHORS.privacy} tone="forest">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+        <SectionHeading
+          eyebrow="Privacy and control"
+          tone="dark"
+          size="large"
+          title="Your code stays yours."
+          description="Local-first is not a slogan here. The default path keeps the scan, the findings and the decisions on your machine."
+        />
 
-          <ul className="flex flex-col gap-3 lg:justify-center">
-            {POINTS.map((point, index) => {
-              const Icon = point.icon;
-              return (
-                <li key={point.title}>
-                  <Reveal
-                    delay={index * 0.07}
-                    className="flex items-start gap-3.5 rounded-xl border border-line bg-surface px-4 py-4"
-                  >
-                    <span className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
-                      <Icon aria-hidden className="size-4" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-medium text-foreground">
-                        {point.title}
-                      </span>
-                      <span className="mt-1 block text-sm leading-relaxed text-muted">
-                        {point.body}
-                      </span>
-                    </span>
-                  </Reveal>
-                </li>
-              );
-            })}
-
-            <li className="pt-1 pl-1">
-              <p className="font-mono text-[11px] leading-relaxed text-dim">
-                Network-dependent checks will be explicitly opt-in.
-              </p>
+        <ul className="border-t border-rule-dark">
+          {POINTS.map((point, index) => (
+            <li key={point.index} className="border-b border-rule-dark">
+              <Reveal delay={index * 0.05} className="grid gap-3 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6">
+                <span className="font-mono text-[11px] text-lime tabular">{point.index}</span>
+                <div>
+                  <h3 className="text-[17px] leading-7 font-medium tracking-[-0.02em] text-dark-ink">
+                    {point.title}
+                  </h3>
+                  <p className="mt-1.5 max-w-xl text-[14px] leading-6 text-dark-muted">{point.body}</p>
+                </div>
+              </Reveal>
             </li>
-          </ul>
-        </div>
+          ))}
+        </ul>
       </div>
+
+      <p className="mt-8 max-w-3xl font-mono text-[11px] leading-5 text-dark-muted">
+        Anonymous usage counters exist but are strictly opt-in and require an endpoint you control.
+        No collector is shipped with cDoc.
+      </p>
     </Section>
   );
 }

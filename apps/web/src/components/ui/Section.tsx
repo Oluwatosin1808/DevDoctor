@@ -1,35 +1,37 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Container } from "./Container";
 
-interface SectionProps extends ComponentPropsWithoutRef<"section"> {
+interface SectionProps extends Omit<ComponentPropsWithoutRef<"section">, "className"> {
   /** In-page id — also the smooth-scroll target. */
   id: string;
   children: ReactNode;
   /** Extra vertical padding, e.g. "py-24 sm:py-32". */
   padding?: string;
-  /** Use the raised panel background instead of the page background. */
-  tone?: "base" | "panel";
+  /** Surface treatment for the section band. */
+  tone?: "canvas" | "paper" | "charcoal" | "forest";
+  className?: string;
 }
+
+const TONES: Record<NonNullable<SectionProps["tone"]>, string> = {
+  canvas: "bg-canvas text-ink",
+  paper: "border-y border-rule bg-paper text-ink",
+  charcoal: "bg-charcoal text-dark-ink",
+  forest: "bg-forest text-dark-ink",
+};
 
 export function Section({
   id,
   children,
-  padding = "py-20 sm:py-28",
-  tone = "base",
+  padding = "py-[72px] sm:py-24 lg:py-32",
+  tone = "canvas",
   className = "",
   ...props
 }: SectionProps) {
   return (
     <section
       id={id}
-      className={[
-        "relative w-full",
-        padding,
-        tone === "panel" ? "bg-panel" : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      data-theme={tone === "charcoal" || tone === "forest" ? "dark" : undefined}
+      className={[TONES[tone], padding, className].filter(Boolean).join(" ")}
       {...props}
     >
       <Container>{children}</Container>

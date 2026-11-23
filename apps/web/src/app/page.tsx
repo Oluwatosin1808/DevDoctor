@@ -9,18 +9,16 @@ import { InstallSection } from "@/components/sections/InstallSection";
 import { PrivacySection } from "@/components/sections/PrivacySection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { SolutionSection } from "@/components/sections/SolutionSection";
-import { TerminalDemo } from "@/components/sections/TerminalDemo";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <TerminalDemo />
       <ProblemSection />
       <SolutionSection />
       <FeaturesSection />
-      <HowItWorksSection />
       <DiagnosticShowcase />
+      <HowItWorksSection />
       <PrivacySection />
       <CommunitySection />
       <InstallSection />

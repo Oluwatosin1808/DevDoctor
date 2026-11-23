@@ -15,7 +15,7 @@ type MotionTag = keyof typeof MOTION_TAGS;
 interface RevealProps {
   children: ReactNode;
   className?: string;
-  /** Seconds to wait before animating — use for staggered grids. */
+  /** Seconds to wait before animating — use for short, capped staggers. */
   delay?: number;
   /** Vertical offset in px. */
   y?: number;
@@ -23,16 +23,13 @@ interface RevealProps {
   as?: MotionTag;
 }
 
-/**
- * Fades and lifts content into place once it enters the viewport.
- * Animations are skipped entirely when the visitor prefers reduced motion.
- */
+/** Fades content into place once, or renders it immediately for reduced motion. */
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 18,
-  duration = 0.6,
+  y = 8,
+  duration = 0.32,
   as = "div",
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
